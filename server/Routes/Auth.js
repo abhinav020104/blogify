@@ -1,6 +1,7 @@
+const express = require("express");
 require("dotenv").config();
 const router = express.Router();
-import { PrismaClient } from "@prisma/client";
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const jwt = require("jsonwebtoken"); 
 const JWT_SECRET = process.env.JWT_SECRET

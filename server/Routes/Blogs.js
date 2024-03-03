@@ -1,5 +1,6 @@
+const express = require("express");
 const router = express.Router();
-import { PrismaClient } from "@prisma/client";
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 router.post("/addblog" , async(req , res)=>{
     const {userId , content ,  title} = req.body

@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-const authRoutes = require("../server/Routes/Auth");
-const blogRoutes = require("../server/Routes/Blogs");
+const authRoutes = require("./Routes/Auth");
+const blogRoutes = require("./Routes/Blogs");
 app.use(express.json()); 
 app.get("/" , (req , res)=>{
     res.status(200).json({
