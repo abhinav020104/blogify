@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET
 const bcrypt = require("bcrypt");
 router.post("/login" , async (req , res)=>{
+    console.log(JWT_SECRET);
     const {email , password} = req.body
     try{
         const userDetails = await prisma.user.findUnique({
