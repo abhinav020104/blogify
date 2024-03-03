@@ -49,7 +49,7 @@ router.post("/login" , async (req , res)=>{
 })
 
 router.post("/signup" , async (req, res)=>{
-    const {email , firstName,lastName , password} = req.body
+    const {email , firstName,lastName , password , confirmpassword} = req.body
     try{
         const userDetails = await prisma.user.findUnique({
             where:{
@@ -60,6 +60,11 @@ router.post("/signup" , async (req, res)=>{
             return res.status(500).json({
                 success:false,
                 message:"user already exists please login "
+            })
+        }else if(password !== confirmpassword){
+            return res.status(404).json({
+                success:false,
+                message:"passwords donot match"
             })
         }else{
             const hashedPassword = await bcrypt.hash(password , 10);
