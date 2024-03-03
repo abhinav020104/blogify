@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-import { PrismaClient } from "@prisma/client";
 const authRoutes = require("../server/Routes/Auth");
+const blogRoutes = require("../server/Routes/Blogs");
 app.use(express.json()); 
 app.get("/" , (req , res)=>{
     res.status(200).json({
@@ -10,6 +10,7 @@ app.get("/" , (req , res)=>{
     })
 })
 app.use("/api/v1/auth" , authRoutes);
+app.use("/api/v1/blog" , blogRoutes)
 app.listen(4000 , ()=>{
     console.log("server listening at port 4000");
 })

@@ -1,5 +1,4 @@
 require("dotenv").config();
-const express = require("express");
 const router = express.Router();
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
@@ -73,7 +72,7 @@ router.post("/signup" , async (req, res)=>{
             return res.status(200).json({
                 success:true,
                 message:"User signup successfull",
-                date:newUser
+                data:newUser
             })
         }
     }catch(error){
