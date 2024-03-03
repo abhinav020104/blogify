@@ -32,7 +32,7 @@ function Login(){
                 <div className="w-[300px]">
                     <Lottie animationData={LoginAnimation}/>
                 </div>
-                <div className="flex flex-col w-[400px] bg-slate-400 h-[400px] rounded-md items-center">
+                <div className="flex flex-col w-[400px] bg-slate-400 h-[400px] rounded-md items-center shadow-xl">
                     <form className="flex flex-col  items-center gap-8 w-11/12">
                         <div className="text-2xl font-sans font-bold mt-6 tracking-normal">
                             Login
