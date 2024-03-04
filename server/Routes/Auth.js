@@ -91,4 +91,29 @@ router.post("/signup" , async (req, res)=>{
         })
     }
 })
+
+router.post("/getuserdetails" , async(req , res)=>{
+    const {token} = req.body;
+    try{
+        const decoded = jwt.verify(token , JWT_SECRET);
+        const userDetails = await prisma.user.findUnique({
+            where:{
+                id:decoded.id,
+            }
+        })
+        return res.status(200).json({
+            success:true,
+            message:"token verified and user verified !",
+            data:userDetails
+        })
+    }catch(error){
+        console.log(error);
+        console.error(error);
+        return res.status(500).json({
+            success:false,
+            message:"Failed to fetch user details ",
+        })
+    }
+})
 module.exports = router;
+

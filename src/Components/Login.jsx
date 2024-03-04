@@ -3,8 +3,14 @@ import LoginAnimation from "../assets/1709405739948.json"
 import Lottie from "lottie-react"
 import { useState } from "react"
 import axios from "axios"
+import { useSetRecoilState } from "recoil"
+import { tokenAtom, userAtom } from "../Store/Atoms/user"
+import {useNavigate} from "react-router-dom"
 function Login(){
     const [loginData , setLoginData] =  useState({});
+    const setToken = useSetRecoilState(tokenAtom);
+    const setUser = useSetRecoilState(userAtom);
+    const navigate = useNavigate();
     const loginHandler = async()=>{
         try{
             const response = await axios({
@@ -13,6 +19,10 @@ function Login(){
                 data:loginData
             })
             console.log(response);
+            localStorage.setItem("token" , JSON.stringify(response.data.data.token))
+            setToken(response.data.data.token);
+            setUser(response.data.data);
+            navigate("/");
         }catch(error){
             console.log(error);
             alert("login failed");
