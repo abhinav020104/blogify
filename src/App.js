@@ -9,6 +9,7 @@ import {Toaster} from "react-hot-toast"
 import toast from "react-hot-toast"
 import axios from "axios"
 import { useEffect } from 'react';
+import MyBlogs from './Components/MyBlogs';
 function App() {
   const token = useRecoilValue(tokenAtom);
   const [user , setUser] = useRecoilState(userAtom);
@@ -26,6 +27,7 @@ function App() {
           }
         })
         toast.dismiss();
+        toast.success("User fetched successfully"); 
         setUser(userDetails.data.data); 
         setLoading(false);
       }catch(error){
@@ -47,6 +49,7 @@ function App() {
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signup' element={<Signup></Signup>}></Route>
+        <Route path='/myblogs' element={<MyBlogs></MyBlogs>}></Route>
       </Routes>
     </div>
   );
