@@ -130,6 +130,7 @@ router.get("/getpublisheduserblogs/:id" , async(req , res)=>{
             select:{
                 title : true,
                 id:true,
+                published:true,
             }
         })
         return res.status(200).json({
@@ -153,6 +154,7 @@ router.get("/getunpublisheduserblogs/:id" , async(req , res)=>{
             select:{
                 title : true,
                 id:true,
+                published:true,
             }
         })
         return res.status(200).json({
@@ -163,6 +165,51 @@ router.get("/getunpublisheduserblogs/:id" , async(req , res)=>{
     }catch(error){
         console.log(error); 
         console.log("failed to fetch user blogs")
+    }
+})
+router.delete("/deleteblog/:id" , async(req , res)=>{
+    const id =  req.params.id;
+    try{
+        await prisma.post.delete({
+            where:{
+                id:id
+            }
+        })
+        return res.status(200).json({
+            success:true,
+            message:"Blog deleted successfully",
+        })
+    }catch(error){
+        console.log(error);
+        return(500).json({
+            success:false,
+            message:"Failed to delete blog !",
+        })
+    }
+})
+
+router.put("/changepublishstatus/:id/:status" , async(req , res)=>{
+    const id =  req.params.id;
+    const status = req.params.status
+    try{
+        await prisma.post.update({
+            data:{
+                published:status === "true" ? true : false
+            },
+            where:{
+                id:id
+            }
+        })
+        return res.status(200).json({
+            success:true,
+            message:"published status changed successfully "
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            success:true,
+            message:"Failed to publishblog"
+        })
     }
 })
 module.exports = router;
