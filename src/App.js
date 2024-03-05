@@ -10,6 +10,8 @@ import toast from "react-hot-toast"
 import axios from "axios"
 import { useEffect } from 'react';
 import MyBlogs from './Components/MyBlogs';
+import PublishedBlogs from './Components/PublishedBlogs';
+import UnpublishedBlogs from './Components/UnpublishedBlogs';
 function App() {
   const token = useRecoilValue(tokenAtom);
   const [user , setUser] = useRecoilState(userAtom);
@@ -43,15 +45,19 @@ function App() {
     fetchData();
   },[]);
   return (
-    <div className='overflow-hidden'>
-      <Toaster></Toaster>
-      <Routes>
-        <Route path='/' element={<Home></Home>}></Route>
-        <Route path='/login' element={<Login></Login>}></Route>
-        <Route path='/signup' element={<Signup></Signup>}></Route>
-        <Route path='/myblogs' element={<MyBlogs></MyBlogs>}></Route>
-      </Routes>
-    </div>
-  );
+  <div className='overflow-hidden'>
+    <Toaster></Toaster>
+    <Routes>
+      <Route path='/' element={<Home></Home>}></Route>
+      <Route path='/login' element={<Login></Login>}></Route>
+      <Route path='/signup' element={<Signup></Signup>}></Route>
+      <Route path='/myblogs' element={<MyBlogs></MyBlogs>}>
+        <Route path='/myblogs/publishedblogs' element={<PublishedBlogs></PublishedBlogs>}></Route>
+        <Route path='/myblogs/unpublishedblogs' element={<UnpublishedBlogs></UnpublishedBlogs>}></Route>
+      </Route>
+    </Routes>
+  </div>
+);
+
 }
 export default App;

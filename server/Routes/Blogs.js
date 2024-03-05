@@ -3,13 +3,14 @@ const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 router.post("/addblog" , async(req , res)=>{
-    const {userId , content ,  title} = req.body
+    const {userId , content ,  title , published} = req.body
     try{
         const newBlogDetails = await prisma.post.create({
             data:{
                 title:title,
                 content:content,
-                authorId:userId
+                authorId:userId,
+                published: published ? published : false
             }
         })
         return res.status(200).json({
@@ -69,7 +70,8 @@ router.get("/fetchblog/:id" , async(req , res)=>{
                 content:true,
                 author:{
                     select:{
-                        name:true
+                        firstName:true,
+                        lastName:true
                     }
                 }
             }
@@ -97,7 +99,11 @@ router.get("/fetchblog/:id" , async(req , res)=>{
 })
 router.get("/fetchallblogs" , async(req , res)=>{
     try{
-        const allblogs = await prisma.post.findMany({});
+        const allblogs = await prisma.post.findMany({
+            where:{
+                published:false
+            }
+        });
         return res.status(200).json({
             success:true,
             message:"all blogs fetched successfully ",
@@ -110,6 +116,53 @@ router.get("/fetchallblogs" , async(req , res)=>{
             success:false,
             message:"failed to fetch all blogs "
         })
+    }
+})
+
+router.get("/getpublisheduserblogs/:id" , async(req , res)=>{
+    const id = req.params.id;
+    try{
+        const blogDetails = await prisma.post.findMany({
+            where:{
+                authorId:id,
+                published:true,
+            },
+            select:{
+                title : true,
+                id:true,
+            }
+        })
+        return res.status(200).json({
+            success:true,
+            message:"Published blogs fetched successfully",
+            data:blogDetails,
+        })
+    }catch(error){
+        console.log(error); 
+        console.log("failed to fetch user blogs")
+    }
+})
+router.get("/getunpublisheduserblogs/:id" , async(req , res)=>{
+    const id = req.params.id;
+    try{
+        const blogDetails = await prisma.post.findMany({
+            where:{
+                authorId:id,
+                published:false,
+            },
+            select:{
+                title : true,
+                id:true,
+            }
+        })
+        return res.status(200).json({
+            success:true,
+            message:"Unpublished blogs fetched successfully",
+            data:blogDetails,
+        })
+    }catch(error){
+        console.log(error); 
+        console.log("failed to fetch user blogs")
     }
 })
 module.exports = router;
