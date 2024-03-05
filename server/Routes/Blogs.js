@@ -101,7 +101,7 @@ router.get("/fetchallblogs" , async(req , res)=>{
     try{
         const allblogs = await prisma.post.findMany({
             where:{
-                published:false
+                published:true
             }
         });
         return res.status(200).json({

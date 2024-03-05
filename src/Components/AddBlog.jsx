@@ -3,16 +3,20 @@ import { useRef, useState, useMemo } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../Store/Atoms/user";
 import axios from "axios";
-
+import {useNavigate} from "react-router-dom"
+import toast from "react-hot-toast"
 const AddBlog = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
+    const [title , setTitle] =  useState(''); 
     const user = useRecoilValue(userAtom);
-
+    const navigate = useNavigate();
     const changeHandler = (value) => {
         setContent(value); 
     }
-
+    const titleHandler = (e)=>{
+        setTitle(e.target.value);
+    }
     const editorConfig = useMemo(() => ({
         buttons: [
             'source', '|',
@@ -35,16 +39,41 @@ const AddBlog = () => {
         height: 500
     }), []);
 
-    const draftHandler = () => {
-        // Add functionality for saving draft
+    const draftHandler = async() => {
+        try{
+            const response = await axios({
+                method:"post",
+                url:"http://localhost:4000/api/v1/blog/addblog",
+                data:{
+                    userId:user.id,
+                    title:title,
+                    content:content
+                }
+            })
+            toast.success("Blog saved as draft ");
+            navigate("/myblogs/unpublishedblogs"); 
+        }catch(error){
+            console.log(error);
+        }
+
     }
 
-    const publishHandler = () => {
-        // Add functionality for publishing blog
+    const publishHandler = async() => {
+        try{
+
+        }catch(error){
+            console.log(error);
+        }
+        
     }
 
-    const exitHandler = () => {
-        // Add functionality for exiting
+    const exitHandler = async() => {
+        try{
+
+        }catch(error){
+            console.log(error);
+        }
+
     } 
 
     return (
@@ -57,7 +86,7 @@ const AddBlog = () => {
 
             <div className="container mx-auto flex-1">
                 <form className=" mt-2 flex flex-col items-center justify-center gap-3">
-                    <input type="text" placeholder="Enter title" className="text-black text-xl font-bold w-full border-b-2 border-black p-3" />
+                    <input type="text" placeholder="Enter title" name="title" className="text-black text-xl font-bold w-full border-b-2 border-black p-3" onChange={titleHandler}/>
                     <div className="w-full h-[500px]">
                         <JoditEditor
                             ref={editor}
