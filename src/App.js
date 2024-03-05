@@ -12,6 +12,7 @@ import { useEffect } from 'react';
 import MyBlogs from './Components/MyBlogs';
 import PublishedBlogs from './Components/PublishedBlogs';
 import UnpublishedBlogs from './Components/UnpublishedBlogs';
+import AddBlog from './Components/AddBlog';
 function App() {
   const token = useRecoilValue(tokenAtom);
   const [user , setUser] = useRecoilState(userAtom);
@@ -55,6 +56,7 @@ function App() {
         <Route path='/myblogs/publishedblogs' element={<PublishedBlogs></PublishedBlogs>}></Route>
         <Route path='/myblogs/unpublishedblogs' element={<UnpublishedBlogs></UnpublishedBlogs>}></Route>
       </Route>
+      <Route path='/addblog' element={<AddBlog></AddBlog>}></Route>
     </Routes>
   </div>
 );
