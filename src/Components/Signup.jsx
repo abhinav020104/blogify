@@ -3,8 +3,12 @@ import Navbar from "./Navbar"
 import Lottie from "lottie-react"
 import axios from "axios" 
 import { useState } from "react"
+import { FaRegEye } from "react-icons/fa6";
+import { FaRegEyeSlash } from "react-icons/fa6";
 function Signup(){
     const [signUpData , setSignUpData] = useState({});
+    const [showPassword , setShowPassword] =  useState(false);
+    const [showConfirmPassword , setShowConfirmPassword] =  useState(false);
     const submitHandler = async()=>{
         try{
             const response = await axios({
@@ -55,14 +59,42 @@ function Signup(){
                                 <input type="text" name="email" placeholder="Enter email address"  onChange={changeHandler}className=" h-[30px] w-full rounded-md py-5 px-4 bg-slate-700 text-white shadow-lg" />
                             </div>
                         </div>
-                        <div className="flex w-full items-center justify-between gap-8">
-                            <div className="flex flex-col justify-center gap-2">
+                        <div className="flex w-full items-center justify-between gap-8 ">
+                            <div className="flex flex-col justify-center gap-2 relative">
                                 <div className=" font-semibold text-[16px] text-black">Password</div>
-                                <input type="text" name="password" placeholder="Enter password "  onChange={changeHandler}className=" h-[30px] w-[200px] rounded-md py-5 px-4 bg-slate-700 text-white shadow-lg"/>
+                                <input type={showPassword === true ? `text` : `password`} name="password" placeholder="Enter password "  onChange={changeHandler}className=" h-[30px] w-[200px] rounded-md py-5 px-4 bg-slate-700 text-white shadow-lg"/>
+                                {
+                                showPassword === false && (
+                                    <FaRegEye className="absolute bottom-[10px] right-[10px] text-white text-xl cursor cursor-pointer" onClick={()=>{
+                                        setShowPassword(!showPassword)
+                                    }}></FaRegEye>
+                                )
+                                }
+                                {
+                                    showPassword === true && (
+                                        <FaRegEyeSlash className="absolute bottom-[10px] right-[10px] text-white text-xl cursor cursor-pointer" onClick={()=>{
+                                            setShowPassword(!showPassword)
+                                        }}></FaRegEyeSlash>
+                                    )
+                                }
                             </div>
-                            <div className="flex flex-col justify-center gap-2">
+                            <div className="flex flex-col justify-center gap-2 relative">
                                 <div className=" font-semibold text-[16px] text-black">Confirm Password</div>
-                                <input type="text" name="confirmpassword"  placeholder="Confirm password" onChange={changeHandler} className=" h-[30px] w-[200px] rounded-md py-5 px-4 bg-slate-700 text-white shadow-lg" />
+                                <input type={showConfirmPassword === true ? `text` : `password`} name="confirmpassword"  placeholder="Confirm password" onChange={changeHandler} className=" h-[30px] w-[200px] rounded-md py-5 px-4 bg-slate-700 text-white shadow-lg" />
+                                {
+                                showConfirmPassword === false && (
+                                    <FaRegEye className="absolute bottom-[10px] right-[10px] text-white text-xl cursor cursor-pointer" onClick={()=>{
+                                        setShowConfirmPassword(!showConfirmPassword)
+                                    }}></FaRegEye>
+                                )
+                                }
+                                {
+                                    showConfirmPassword === true && (
+                                        <FaRegEyeSlash className="absolute bottom-[10px] right-[10px] text-white text-xl cursor cursor-pointer" onClick={()=>{
+                                            setShowConfirmPassword(!showConfirmPassword)
+                                        }}></FaRegEyeSlash>
+                                    )
+                                }
                             </div>
                         </div>
                     </form>

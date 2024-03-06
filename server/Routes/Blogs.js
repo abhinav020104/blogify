@@ -100,6 +100,12 @@ router.get("/fetchblog/:id" , async(req , res)=>{
 router.get("/fetchallblogs/:id" , async(req , res)=>{
     const id = req.params.id
     try{
+        if(id === undefined){
+            return res.status(500).json({
+                success:false,
+                message:"failed to fetch all blogs "
+            })
+        }
         const allblogs = await prisma.post.findMany({
             where:{
                 published:true,
@@ -218,8 +224,8 @@ router.put("/changepublishstatus/:id/:status" , async(req , res)=>{
 })
 
 router.post("/searchblog" , async(req , res)=>{
-    const searchData = req.body;
-    const id = req.body;
+    const searchData = req.body.searchData;
+    const id = req.body.id;
     try{
         const response = await prisma.post.findMany({
             where:{
@@ -245,4 +251,30 @@ router.post("/searchblog" , async(req , res)=>{
     }
 })
 
+router.put("/editblog/:id" , async(req , res)=>{
+    const id = req.params.id;
+    const {title , content} = req.body;
+    try{
+        const response = await prisma.post.update({
+            data:{
+                title:title,
+                content:content,
+            },
+            where:{
+                id:id
+            }
+        })
+        return res.status(200).json({
+            success:true,
+            message:"Blog Edit Successfull",
+            data:response,
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"Failed to edit blog"
+        })
+    }
+})
 module.exports = router;

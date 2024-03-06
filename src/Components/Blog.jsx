@@ -1,5 +1,7 @@
 import axios from "axios"
+import {useNavigate} from "react-router-dom"
 const Blog = ({blogData})=>{
+    const navigate = useNavigate();
     const publishHandler = async()=>{
         try{
             console.log(blogData)
@@ -17,7 +19,7 @@ const Blog = ({blogData})=>{
     }
     const editHandler = async()=>{
         try{
-
+            navigate(`/editblog/${blogData.id}`)
         }catch(error){
             console.log(error);
         }
@@ -37,7 +39,7 @@ const Blog = ({blogData})=>{
     }
     return(
         <div className="flex flex-col w-full mx-auto  font-mono ">
-            <div className="flex  w-full  justify-around text-black font-bold  border-b-2 border-slate-400 ">
+            <div className="flex  w-full  justify-around text-black font-bold  border-b-2 border-slate-400 items-center">
                 <div className=" p-4 flex w-[900px] justify-between ">{blogData.title}</div>
                 <div className=" p-4 flex w-[250px] justify-between gap-6 tracking-wider">
                     <button className="bg-green-500 text-black p-2 rounded-md hover:scale-95 duration-200" onClick={publishHandler}>

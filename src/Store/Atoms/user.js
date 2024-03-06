@@ -15,4 +15,4 @@ const loadingAtom = atom({
     default:false,
 })
 
-export {tokenAtom , userAtom , loadingAtom};
+export {tokenAtom , userAtom , loadingAtom };

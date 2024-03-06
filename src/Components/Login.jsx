@@ -6,11 +6,14 @@ import axios from "axios"
 import { useSetRecoilState } from "recoil"
 import { tokenAtom, userAtom } from "../Store/Atoms/user"
 import {useNavigate} from "react-router-dom"
+import { FaRegEye } from "react-icons/fa6";
+import { FaRegEyeSlash } from "react-icons/fa6";
 function Login(){
     const [loginData , setLoginData] =  useState({});
     const setToken = useSetRecoilState(tokenAtom);
     const setUser = useSetRecoilState(userAtom);
     const navigate = useNavigate();
+    const [showPassword , setShowPassword] =  useState(false);
     const loginHandler = async()=>{
         try{
             const response = await axios({
@@ -55,9 +58,23 @@ function Login(){
                                 <input type="text" name="email" placeholder="Enter email address"className=" h-[30px] w-full rounded-md py-5 px-4 bg-slate-700 text-white shadow-lg"  onChange={changeHandler}/>
                             </div>
                         </div>
-                        <div className="flex flex-col w-full gap-2">
-                        <div className=" font-semibold text-[16px] text-black">Password</div>
-                    <input type="text" name="password" placeholder="Enter password " className=" h-[30px] w-full rounded-md py-5 px-4 bg-slate-700 text-white shadow-lg" onChange={changeHandler}/>
+                        <div className="flex flex-col w-full gap-2 relative">
+                            <div className=" font-semibold text-[16px] text-black">Password</div>
+                            <input type={showPassword === true ? `text` : `password`} name="password" placeholder="Enter password " className=" h-[30px] w-full rounded-md py-5 px-4 bg-slate-700 text-white shadow-lg" onChange={changeHandler}/>
+                            {
+                                showPassword === false && (
+                                    <FaRegEye className="absolute bottom-[10px] right-[10px] text-white text-xl cursor cursor-pointer" onClick={()=>{
+                                        setShowPassword(!showPassword)
+                                    }}></FaRegEye>
+                                )
+                            }
+                            {
+                                showPassword === true && (
+                                    <FaRegEyeSlash className="absolute bottom-[10px] right-[10px] text-white text-xl cursor cursor-pointer" onClick={()=>{
+                                        setShowPassword(!showPassword)
+                                    }}></FaRegEyeSlash>
+                                )
+                            }
                         </div>
                     </form>
                     <button className="bg-slate-700 text-white w-[125px] p-2 rounded-md hover:scale-95 duration-200 mt-12 cursor-pointer shadow-lg" onClick={loginHandler}>Login</button>

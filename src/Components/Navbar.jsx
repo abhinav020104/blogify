@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom"
 import { useRecoilCallback, useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { loadingAtom, tokenAtom, userAtom } from "../Store/Atoms/user";
+import { useState } from "react";
 function Navbar(){
     const navigate = useNavigate();
     const [token , setToken] = useRecoilState(tokenAtom);
@@ -11,10 +12,14 @@ function Navbar(){
         localStorage.clear();
         setToken(null); 
     }
+    const [searchData , setSearchData] = useState("");
+    const searchDataChangeHandler =(e)=>{
+        setSearchData(e.target.value);
+    }
     return(
-        <div className="  bg-slate-400 h-[70px] w-screen border-b-2 border-black flex items-center justify-center">
+        <div className="  bg-slate-400 h-[70px] w-screen border-b-2 border-black flex items-center justify-center fixed z-10">
             <div className="w-[94%] flex items-center h-full justify-between">
-                <div className="text-slate-800 text-2xl font-xl font-bold font-mono cursor-pointer">Blogify</div>
+                <a href="/" className="text-slate-800 text-2xl font-xl font-bold font-mono cursor-pointer">Blogify</a>
                 {
                     token === null  && (
                         <div>
@@ -28,6 +33,10 @@ function Navbar(){
                 {
                     token !== null &&(
                         <div className="flex justify-between items-center gap-10 text-black">
+                            <div className="flex gap-6 mr-56">
+                                <input type="text" className=" w-[300px] p-2  rounded-md bg-slate-600 font-mono text-white" placeholder="search blogs.." name="search" onChange={searchDataChangeHandler}/>
+                                <button className="font-xl text-white bg-slate-600 rounded-md p-3  hover:scale-95 duration-200">Search</button>
+                            </div>
                             <div className="font-bold text-black  text-[15px] tracking-wide">
                                 {loading === false ? `welcome ! ${user.firstName} ${user.lastName}` : `Fetching details...`}
                             </div>
