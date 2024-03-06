@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { userAtom } from "../Store/Atoms/user";
 
 const BlogFeed = () => {
     const [blogs, setBlogs] = useState([]);
-
+    const user = useRecoilValue(userAtom); 
     const fetchData = async () => {
-        try {
-            const response = await axios.get("http://localhost:4000/api/v1/blog/fetchallblogs");
+        try {    
+            const response = await axios.get(`http://localhost:4000/api/v1/blog/fetchallblogs/${user.id}`);
             setBlogs(response.data.data);
             console.log(response.data.data); 
         } catch (error) {

@@ -97,11 +97,15 @@ router.get("/fetchblog/:id" , async(req , res)=>{
         })
     }
 })
-router.get("/fetchallblogs" , async(req , res)=>{
+router.get("/fetchallblogs/:id" , async(req , res)=>{
+    const id = req.params.id
     try{
         const allblogs = await prisma.post.findMany({
             where:{
-                published:true
+                published:true,
+                authorId:{
+                    not:id
+                }
             }
         });
         return res.status(200).json({
@@ -212,4 +216,33 @@ router.put("/changepublishstatus/:id/:status" , async(req , res)=>{
         })
     }
 })
+
+router.post("/searchblog" , async(req , res)=>{
+    const searchData = req.body;
+    const id = req.body;
+    try{
+        const response = await prisma.post.findMany({
+            where:{
+                title:{
+                    contains:searchData
+                },
+                authorId:{
+                    not:id
+                }
+            }
+        })
+        return res.status(200).json({
+            success:true,
+            message:"Blogs searched successfully",
+            data:response
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"Failed to search blog"
+        })
+    }
+})
+
 module.exports = router;

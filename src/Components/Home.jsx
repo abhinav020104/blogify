@@ -4,7 +4,7 @@ function Home(){
     return(
         <div className="bg-white w-screen  h-screen flex flex-col">
             <Navbar/>
-            <div className="w-screen h-full">
+            <div className="w-11/12 mx-auto h-full">
                 <BlogFeed></BlogFeed>
             </div>
         </div>
