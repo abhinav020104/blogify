@@ -26,7 +26,7 @@ const UnpublishedBlogs = ()=>{
         fetchData();
     },[user]);
     return(
-        <div className="flex flex-col w-[90%] mx-auto mt-2">
+        <div className="flex flex-col w-[90%] mx-auto ">
         {
             loading === true &&(
                 <div className="w-full flex items-center justify-center">

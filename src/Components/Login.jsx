@@ -8,6 +8,7 @@ import { tokenAtom, userAtom } from "../Store/Atoms/user"
 import {useNavigate} from "react-router-dom"
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import toast from "react-hot-toast"
 function Login(){
     const [loginData , setLoginData] =  useState({});
     const setToken = useSetRecoilState(tokenAtom);
@@ -16,19 +17,22 @@ function Login(){
     const [showPassword , setShowPassword] =  useState(false);
     const loginHandler = async()=>{
         try{
+            toast.loading("Login in process")
             const response = await axios({
                 method:"post",
                 url:"http://localhost:4000/api/v1/auth/login",
                 data:loginData
             })
-            console.log(response);
+            toast.dismiss();
+            toast.success("Login Successfull")
             localStorage.setItem("token" , JSON.stringify(response.data.data.token))
             setToken(response.data.data.token);
             setUser(response.data.data);
             navigate("/");
         }catch(error){
+            toast.dismiss();
             console.log(error);
-            alert("login failed");
+            toast.error("Invalid credentials")
             console.log("login frontend error");
         }
     }

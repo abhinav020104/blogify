@@ -9,7 +9,7 @@ const MyBlogs = ()=>{
             <Navbar></Navbar>
             <div className="h-full w-screen flex">
                 <SideBar></SideBar>
-                <div className="w-11/12">
+                <div className="w-11/12 mt-20">
                     <Outlet></Outlet>
                 </div>
             </div>

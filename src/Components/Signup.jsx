@@ -101,6 +101,7 @@ function Signup(){
                         <button className="bg-slate-700 text-white w-[125px] p-2 rounded-md hover:scale-95 duration-200 cursor-pointer mt-12 shadow-lg" onClick={submitHandler}>Sign Up</button>
                 </div>
             </div>
+            <div id="recaptcha" className="mt-[-50px] mx-auto rounded-md"></div>
         </div>
     )
 }

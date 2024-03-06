@@ -2,21 +2,24 @@ import { useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import toast from "react-hot-toast";
 const BlogDetail = () => {
     const location = useLocation(); 
     const id = location.pathname.split("/").at(-1);
     console.log(id);
     const [blog , setBlog] = useState({});
-    
     const fetchData = async () => {
+        toast.loading("Fetching blog Details")
         try {
             const blogData = await axios({
                 method: "get",
                 url: `http://localhost:4000/api/v1/blog/fetchblog/${id}`
             });
+            toast.dismiss();
+            toast.success("Blog fetched successfully")
             setBlog(blogData.data.data);
         } catch (error) {
+            toast.dismiss(); 
             console.log(error); 
         }
     };

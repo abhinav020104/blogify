@@ -15,4 +15,8 @@ const loadingAtom = atom({
     default:false,
 })
 
-export {tokenAtom , userAtom , loadingAtom };
+const searchDataAtom = atom({
+    key:"searchDataAtom",
+    default:{}
+})
+export {tokenAtom , userAtom , loadingAtom , searchDataAtom};
