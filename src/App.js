@@ -58,7 +58,6 @@ function App() {
         <Route path='/myblogs/unpublishedblogs' element={<UnpublishedBlogs></UnpublishedBlogs>}></Route>
       </Route>
       <Route path='/addblog' element={<AddBlog></AddBlog>}></Route>
-      <Route path='/blogfeed'element={<BlogFeed></BlogFeed>}></Route>
     </Routes>
   </div>
 );

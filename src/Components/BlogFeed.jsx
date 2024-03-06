@@ -8,6 +8,7 @@ const BlogFeed = () => {
         try {
             const response = await axios.get("http://localhost:4000/api/v1/blog/fetchallblogs");
             setBlogs(response.data.data);
+            console.log(response.data.data); 
         } catch (error) {
             console.error("Error fetching blogs:", error);
         }
