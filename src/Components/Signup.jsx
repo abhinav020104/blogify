@@ -13,7 +13,7 @@ function Signup(){
         try{
             const response = await axios({
                 method:"POST",
-                url:"http://localhost:4000/api/v1/auth/signup",
+                url:"https://blogify-backend.codewithabhinav.online/api/v1/auth/signup",
                 data:signUpData
             })
             console.log(response);

@@ -9,7 +9,7 @@ const BlogFeed = () => {
     const navigate =  useNavigate();
     const fetchData = async () => {
         try {    
-            const response = await axios.get(`http://localhost:4000/api/v1/blog/fetchallblogs/${user.id}`);
+            const response = await axios.get(`https://blogify-backend.codewithabhinav.online/api/v1/blog/fetchallblogs/${user.id}`);
             setBlogs(response.data.data);
             console.log(response.data.data); 
         } catch (error) {

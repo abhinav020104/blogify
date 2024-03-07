@@ -16,7 +16,7 @@ const SearchResult = ()=>{
             toast.loading("fetching search results")
             const response = await axios({
                 method:"post",
-                url:"http://localhost:4000/api/v1/blog/searchblog",
+                url:"https://blogify-backend.codewithabhinav.online/api/v1/blog/searchblog",
                 data:{
                     title:searchData,
                     id:user.id

@@ -13,7 +13,7 @@ const UnpublishedBlogs = ()=>{
         try{
             const response =  await axios({
                 method:"get",
-                url:`http://localhost:4000/api/v1/blog/getunpublisheduserblogs/${user.id}`
+                url:`https://blogify-backend.codewithabhinav.online/api/v1/blog/getunpublisheduserblogs/${user.id}`
             })
             console.log(response.data.data);
             setBlogs(response.data.data);

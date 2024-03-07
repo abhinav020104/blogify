@@ -1,6 +1,7 @@
 import axios from "axios"
 import {useNavigate , useLocation} from "react-router-dom"
-const Blog = ({blogData})=>{
+const 
+Blog = ({blogData})=>{
     const location = useLocation();
     const navigate = useNavigate();
     const currPath = location.pathname.split("/").at(-1);
@@ -11,7 +12,7 @@ const Blog = ({blogData})=>{
             console.log(status);
             const response = await axios({
                 method:"put",
-                url:`http://localhost:4000/api/v1/blog/changepublishstatus/${blogData.id}/${status}`,
+                url:`https://blogify-backend.codewithabhinav.online/api/v1/blog/changepublishstatus/${blogData.id}/${status}`,
                 data:{}
             })
             console.log(response);
@@ -32,7 +33,7 @@ const Blog = ({blogData})=>{
         try{
             const response  = await axios({
                 method:"delete",
-                url:`http://localhost:4000/api/v1/blog/deleteblog/${blogData.id}`
+                url:`https://blogify-backend.codewithabhinav.online/api/v1/blog/deleteblog/${blogData.id}`
             })
             console.log(response);
             navigate("/myblogs/publishedblogs");

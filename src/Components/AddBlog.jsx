@@ -59,7 +59,7 @@ const AddBlog = () => {
         if (!validateInputs()) return;
 
         try {
-            const response = await axios.post("http://localhost:4000/api/v1/blog/addblog", {
+            const response = await axios.post("https://blogify-backend.codewithabhinav.online/api/v1/blog/addblog", {
                 userId: user.id,
                 title: title,
                 content: content
@@ -75,7 +75,7 @@ const AddBlog = () => {
     const publishHandler = async() => {
         if (!validateInputs()) return;
         try {
-            const response = await axios.post("http://localhost:4000/api/v1/blog/addblog", {
+            const response = await axios.post("https://blogify-backend.codewithabhinav.online/api/v1/blog/addblog", {
                 userId: user.id,
                 title: title,
                 content: content,

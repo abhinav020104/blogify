@@ -12,7 +12,7 @@ const EditBlog = () => {
     const id = location.pathname.split("/").at(-1);
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:4000/api/v1/blog/fetchblog/${id}`);
+            const response = await axios.get(`https://blogify-backend.codewithabhinav.online/api/v1/blog/fetchblog/${id}`);
             setTitle(response.data.data.title);
             setContent(response.data.data.content);
         } catch (error) {
@@ -72,7 +72,7 @@ const EditBlog = () => {
         if (!validateInputs()) return;
 
         try {
-            await axios.put(`http://localhost:4000/api/v1/blog/editblog/${id}`, {
+            await axios.put(`https://blogify-backend.codewithabhinav.online/api/v1/blog/editblog/${id}`, {
                 title: title,
                 content: content
             });

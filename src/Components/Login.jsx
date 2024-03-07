@@ -20,7 +20,7 @@ function Login(){
             toast.loading("Login in process")
             const response = await axios({
                 method:"post",
-                url:"http://localhost:4000/api/v1/auth/login",
+                url:"https://blogify-backend.codewithabhinav.online/api/v1/auth/login",
                 data:loginData
             })
             toast.dismiss();
