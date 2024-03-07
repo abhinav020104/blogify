@@ -224,13 +224,13 @@ router.put("/changepublishstatus/:id/:status" , async(req , res)=>{
 })
 
 router.post("/searchblog" , async(req , res)=>{
-    const searchData = req.body.searchData;
+    const searchTitle = req.body.title;
     const id = req.body.id;
     try{
         const response = await prisma.post.findMany({
             where:{
                 title:{
-                    contains:searchData
+                    contains:searchTitle
                 },
                 authorId:{
                     not:id

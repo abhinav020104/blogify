@@ -34,8 +34,8 @@ const BlogFeed = () => {
             <div className="flex flex-col gap-6">
             {blogs.map((blog, index) => (
                 <div key={index} className=" border-b-2 border-slate-400 p-2">
-                    <div className="font-bold text-xl text-black cursor-pointer" onClick={()=>{
-                        navigate(`blogdetail/${blog.id}`)
+                    <div className="font-bold text-2xl text-black cursor-pointer" onClick={()=>{
+                        navigate(`/blogdetail/${blog.id}`)
                     }}>{blog.title}</div>
                 </div>
             ))}
