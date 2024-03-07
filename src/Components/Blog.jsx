@@ -1,7 +1,9 @@
 import axios from "axios"
-import {useNavigate} from "react-router-dom"
+import {useNavigate , useLocation} from "react-router-dom"
 const Blog = ({blogData})=>{
+    const location = useLocation();
     const navigate = useNavigate();
+    const currPath = location.pathname.split("/").at(-1);
     const publishHandler = async()=>{
         try{
             console.log(blogData)
@@ -13,6 +15,7 @@ const Blog = ({blogData})=>{
                 data:{}
             })
             console.log(response);
+            navigate(`/myblogs/${currPath === "publishedblogs" ? "unpublishedblogs" : "publishedblogs"}`);
         }catch(error){
             console.log(error);
         }
@@ -32,6 +35,7 @@ const Blog = ({blogData})=>{
                 url:`http://localhost:4000/api/v1/blog/deleteblog/${blogData.id}`
             })
             console.log(response);
+            navigate("/myblogs/publishedblogs");
         }catch(error){
             console.log(error);
         }

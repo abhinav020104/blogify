@@ -60,11 +60,21 @@ const AddBlog = () => {
 
     const publishHandler = async() => {
         try{
-
+            const response = await axios({
+                method:"post",
+                url:"http://localhost:4000/api/v1/blog/addblog",
+                data:{
+                    userId:user.id,
+                    title:title,
+                    content:content,
+                    published:true,
+                }
+            })
+            toast.success("Blog saved as draft ");
+            navigate("/myblogs/publishedblogs"); 
         }catch(error){
             console.log(error);
         }
-        
     }
 
     const exitHandler = async() => {
