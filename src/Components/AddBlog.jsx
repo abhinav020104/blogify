@@ -3,20 +3,24 @@ import { useRef, useState, useMemo } from "react";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../Store/Atoms/user";
 import axios from "axios";
-import {useNavigate} from "react-router-dom"
-import toast from "react-hot-toast"
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+
 const AddBlog = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
     const [title , setTitle] =  useState(''); 
     const user = useRecoilValue(userAtom);
     const navigate = useNavigate();
+
     const changeHandler = (value) => {
         setContent(value); 
     }
+
     const titleHandler = (e)=>{
         setTitle(e.target.value);
     }
+
     const editorConfig = useMemo(() => ({
         buttons: [
             'source', '|',
@@ -39,52 +43,55 @@ const AddBlog = () => {
         height: 500
     }), []);
 
+    const validateInputs = () => {
+        if (!title.trim()) {
+            toast.error("Fields cannot be empty");
+            return false;
+        }
+        if (!content.trim()) {
+            toast.error("Fields cannot be empty");
+            return false;
+        }
+        return true;
+    }
+
     const draftHandler = async() => {
-        try{
-            const response = await axios({
-                method:"post",
-                url:"http://localhost:4000/api/v1/blog/addblog",
-                data:{
-                    userId:user.id,
-                    title:title,
-                    content:content
-                }
-            })
+        if (!validateInputs()) return;
+
+        try {
+            const response = await axios.post("http://localhost:4000/api/v1/blog/addblog", {
+                userId: user.id,
+                title: title,
+                content: content
+            });
             toast.success("Blog saved as draft ");
             navigate("/myblogs/unpublishedblogs"); 
-        }catch(error){
-            console.log(error);
+        } catch(error) {
+            console.error(error);
+            toast.error("Failed to save blog as draft");
         }
-
     }
 
     const publishHandler = async() => {
-        try{
-            const response = await axios({
-                method:"post",
-                url:"http://localhost:4000/api/v1/blog/addblog",
-                data:{
-                    userId:user.id,
-                    title:title,
-                    content:content,
-                    published:true,
-                }
-            })
-            toast.success("Blog saved as draft ");
+        if (!validateInputs()) return;
+        try {
+            const response = await axios.post("http://localhost:4000/api/v1/blog/addblog", {
+                userId: user.id,
+                title: title,
+                content: content,
+                published: true,
+            });
+            toast.success("Blog published successfully");
             navigate("/myblogs/publishedblogs"); 
-        }catch(error){
-            console.log(error);
+        } catch(error) {
+            console.error(error);
+            toast.error("Failed to publish blog");
         }
     }
 
-    const exitHandler = async() => {
-        try{
-            navigate("/");
-        }catch(error){
-            console.log(error);
-        }
-
-    } 
+    const exitHandler = () => {
+        navigate("/");
+    }
 
     return (
         <div className="flex flex-col h-screen overflow-auto">
