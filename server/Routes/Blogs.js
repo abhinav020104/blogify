@@ -231,6 +231,7 @@ router.post("/searchblog" , async(req , res)=>{
             where:{
                 title:{
                     contains:searchTitle,
+                    mode:'insensitive'
                 },
                 authorId:{
                     not:id
