@@ -5,21 +5,25 @@ import axios from "axios"
 import { useState } from "react"
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
+import toast from "react-hot-toast";
 function Signup(){
     const [signUpData , setSignUpData] = useState({});
     const [showPassword , setShowPassword] =  useState(false);
     const [showConfirmPassword , setShowConfirmPassword] =  useState(false);
     const submitHandler = async()=>{
         try{
+            toast.loading("Sign Up in process")
             const response = await axios({
                 method:"POST",
                 url:"https://blogify-backend.codewithabhinav.online/api/v1/auth/signup",
                 data:signUpData
             })
-            console.log(response);
+            toast.dismiss();
+            toast.success("Sign Up Successfull")
         }catch(error){
+            toast.dismiss();
             console.log(error);
-            alert("failed to signup")
+            toast.error("Failed to Sign Up")
             console.log("Signup frontend error")
         }
     }
