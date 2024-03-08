@@ -1,25 +1,35 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { tokenAtom, userAtom } from "../Store/Atoms/user";
+import axios from "axios";
+import toast from "react-hot-toast";
 import JoditEditor from "jodit-react";
 import { useRef, useState, useMemo } from "react";
-import { useRecoilValue } from "recoil";
-import { userAtom } from "../Store/Atoms/user";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 
 const AddBlog = () => {
     const editor = useRef(null);
     const [content, setContent] = useState('');
-    const [title , setTitle] =  useState(''); 
+    const [title, setTitle] = useState('');
     const user = useRecoilValue(userAtom);
     const navigate = useNavigate();
+    const token = useRecoilValue(tokenAtom);
+
+    
+    useEffect(() => {
+        if (token  === null) {
+            toast.error("Please login to write a blog !");
+            navigate("/login");
+        }
+    }, [token, navigate]);
 
     const changeHandler = (value) => {
-        setContent(value); 
-    }
+        setContent(value);
+    };
 
-    const titleHandler = (e)=>{
+    const titleHandler = (e) => {
         setTitle(e.target.value);
-    }
+    };
 
     const editorConfig = useMemo(() => ({
         buttons: [
@@ -30,7 +40,7 @@ const AddBlog = () => {
             'italic', '|',
             'ul',
             'ol', '|',
-            'outdent', 'indent',  '|',
+            'outdent', 'indent', '|',
             'font',
             'fontsize',
             'link', '|',
@@ -44,54 +54,42 @@ const AddBlog = () => {
     }), []);
 
     const validateInputs = () => {
-        if (!title.trim()) {
-            toast.error("Fields cannot be empty");
-            return false;
-        }
-        if (!content.trim()) {
+        if (!title.trim() || !content.trim()) {
             toast.error("Fields cannot be empty");
             return false;
         }
         return true;
-    }
+    };
 
-    const draftHandler = async() => {
+    const handleBlogSubmission = async (published) => {
         if (!validateInputs()) return;
 
-        try {
-            const response = await axios.post("https://blogify-backend.codewithabhinav.online/api/v1/blog/addblog", {
-                userId: user.id,
-                title: title,
-                content: content
-            });
-            toast.success("Blog saved as draft ");
-            navigate("/myblogs/unpublishedblogs"); 
-        } catch(error) {
-            console.error(error);
-            toast.error("Failed to save blog as draft");
-        }
-    }
-
-    const publishHandler = async() => {
-        if (!validateInputs()) return;
         try {
             const response = await axios.post("https://blogify-backend.codewithabhinav.online/api/v1/blog/addblog", {
                 userId: user.id,
                 title: title,
                 content: content,
-                published: true,
+                published: published,
             });
-            toast.success("Blog published successfully");
-            navigate("/myblogs/publishedblogs"); 
-        } catch(error) {
+            if (published) {
+                toast.success("Blog published successfully");
+                navigate("/myblogs/publishedblogs");
+            } else {
+                toast.success("Blog saved as draft");
+                navigate("/myblogs/unpublishedblogs");
+            }
+        } catch (error) {
             console.error(error);
-            toast.error("Failed to publish blog");
+            toast.error(published ? "Failed to publish blog" : "Failed to save blog as draft");
         }
-    }
+    };
+
+    const draftHandler = () => handleBlogSubmission(false);
+    const publishHandler = () => handleBlogSubmission(true);
 
     const exitHandler = () => {
         navigate("/");
-    }
+    };
 
     return (
         <div className="flex flex-col h-screen overflow-auto">
@@ -103,7 +101,7 @@ const AddBlog = () => {
 
             <div className="container mx-auto flex-1">
                 <form className=" mt-2 flex flex-col items-center justify-center gap-3">
-                    <input type="text" placeholder="Enter title" name="title" className="text-black text-xl font-bold w-full border-b-2 border-black p-3" onChange={titleHandler}/>
+                    <input type="text" placeholder="Enter title" name="title" className="text-black text-xl font-bold w-full border-b-2 border-black p-3" onChange={titleHandler} />
                     <div className="w-full h-[500px]">
                         <JoditEditor
                             ref={editor}
@@ -128,6 +126,6 @@ const AddBlog = () => {
             </div>
         </div>
     );
-}
+};
 
 export default AddBlog;

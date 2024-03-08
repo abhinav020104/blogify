@@ -4,10 +4,13 @@ import Lottie from "lottie-react"
 import homeAnimtation from "../assets/1709715860791.json"
 import writingAnimation from "../assets/1709721096056.json"
 import {useNavigate} from "react-router-dom"
+import { useRecoilValue } from "recoil"
+import { tokenAtom } from "../Store/Atoms/user"
 function Home(){
     const navigate =  useNavigate();
+    const token = useRecoilValue(tokenAtom);
     const clickHandler = ()=>{
-        navigate("/addblog");
+        token === null ? navigate("/login") : navigate("/addblog")
     }
     return(
         <div className="bg-white w-screen  min-h-screen flex flex-col overflow-y-auto">
