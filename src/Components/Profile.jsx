@@ -24,7 +24,7 @@ function Profile(){
                         <div className="bg-slate-400 p-1 rounded-lg w-[40%] text-center select-none">{`${user.lastName}`}</div>
                     </div>
                     <div className=" flex ml-20 w-full  gap-12 justify-center items-center">
-                        <div className="w-[105px]">Mobile</div>
+                        <div className="w-[105px]">Email</div>
                         <div className="bg-slate-400 p-1 rounded-lg w-[52%] text-center select-none">{`${user.email}`}</div>
                     </div>
                 </div>
