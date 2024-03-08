@@ -32,7 +32,7 @@ const BlogFeed = () => {
 
     return (
         <div className="w-11/12 mx-auto">
-            <div className="w-full flex items-center justify-center mt-12 flex-col gap-3 mb-3">
+            <div className="w-full flex items-center justify-center mt-12 flex-col gap-3 mb-3                       ">
                 <div className="text-black font-bold text-xl">
                     Read On Trending Topics
                 </div>
