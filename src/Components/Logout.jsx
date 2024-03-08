@@ -1,7 +1,8 @@
-import { useRecoilState, useSetRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil"
 import NavBar from "./Navbar"
 import { tokenAtom, userAtom } from "../Store/Atoms/user"
 import {useNavigate , Navigate} from "react-router-dom"
+import toast from "react-hot-toast";
 const Logout = ()=>{
     const [user , setUser] =  useRecoilState(userAtom);
     const setToken = useSetRecoilState(tokenAtom);
@@ -11,6 +12,7 @@ const Logout = ()=>{
         setUser({});
         localStorage.clear();
         navigate("/");
+        toast.success("Logout successfull")
     }
     const noHandler = ()=>{
         navigate("/");
