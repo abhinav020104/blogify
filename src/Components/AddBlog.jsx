@@ -65,6 +65,11 @@ const AddBlog = () => {
         if (!validateInputs()) return;
 
         try {
+            if(published){
+                toast.loading("Blog Publish in progress")
+            }else{
+                toast.loading("Saving Blog as draft")
+            }
             const response = await axios.post("https://blogify-backend.codewithabhinav.online/api/v1/blog/addblog", {
                 userId: user.id,
                 title: title,
@@ -72,6 +77,7 @@ const AddBlog = () => {
                 published: published,
             });
             if (published) {
+                toast.dismiss();
                 toast.success("Blog published successfully");
                 navigate("/myblogs/publishedblogs");
             } else {

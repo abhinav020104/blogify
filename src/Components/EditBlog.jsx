@@ -72,10 +72,12 @@ const EditBlog = () => {
         if (!validateInputs()) return;
 
         try {
+            toast.loading("Saving Changes");
             await axios.put(`https://blogify-backend.codewithabhinav.online/api/v1/blog/editblog/${id}`, {
                 title: title,
                 content: content
             });
+            toast.dismiss();
             toast.success("Blog edit successful");
             navigate("/myblogs/unpublishedblogs"); 
         } catch (error) {
