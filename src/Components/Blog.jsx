@@ -37,11 +37,13 @@ Blog = ({blogData})=>{
     }
     const deleteHandler = async()=>{
         try{
+            toast.loading("Deleting Blog");
             const response  = await axios({
                 method:"delete",
                 url:`https://blogify-backend.codewithabhinav.online/api/v1/blog/deleteblog/${blogData.id}`
             })
             console.log(response);
+            toast.dismiss();
             toast.success("Blog Deleted Successfully");
             navigate("/myblogs/publishedblogs");
         }catch(error){
