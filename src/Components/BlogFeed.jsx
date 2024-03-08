@@ -28,8 +28,13 @@ const BlogFeed = () => {
 
     return (
         <div className="w-11/12 mx-auto">
-            <div>
+            <div className="w-full flex items-center justify-center mt-12 flex-col gap-3">
+                <div className="text-black font-bold text-xl">
+                    Read On Trending Topics 
+                </div>
+                <div className="w-[30%] border-b-2 border-slate-500">
 
+                </div>
             </div>
             <div className="flex flex-col gap-6">
             {blogs.map((blog, index) => (

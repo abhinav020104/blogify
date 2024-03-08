@@ -16,11 +16,11 @@ function Home(){
         <div className="bg-white w-screen  min-h-screen flex flex-col overflow-y-auto">
             <Navbar/>
             <div className="w-11/12 mx-auto h-full mt-24">
-                <div className="w-full flex justify-center gap-32 items-center h-[350px]">
+                <div className="w-full flex justify-center gap-32 items-center h-[300px] mt-6">
                     <div className="w-[30%]">
                         <Lottie animationData={homeAnimtation}></Lottie> 
                     </div>
-                    <div className="flex flex-col items-center bg-slate-500 h-full w-[350px] rounded-md justify-center gap-6">
+                    <div className="flex flex-col items-center bg-slate-500 h-[350px] w-[350px] rounded-md justify-center gap-6">
                         <div className="text-xl text-black font-mono font-bold">
                             Write Your Blog Today...
                         </div>

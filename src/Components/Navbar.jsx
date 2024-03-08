@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom"
-import { useRecoilCallback, useRecoilState, useRecoilValue, useRecoilValueLoadable, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue , useSetRecoilState } from "recoil";
 import { loadingAtom, searchDataAtom, tokenAtom, userAtom } from "../Store/Atoms/user";
 import { useState } from "react";
 function Navbar(){
@@ -9,9 +9,7 @@ function Navbar(){
     const [user , setUser] = useRecoilState(userAtom);
     const setSearch =  useSetRecoilState(searchDataAtom)
     const logoutHandler = ()=>{
-        setUser({});
-        localStorage.clear();
-        setToken(null); 
+        navigate("/logout"); 
     }
     const [searchData , setSearchData] = useState("");
     const searchDataChangeHandler =(e)=>{

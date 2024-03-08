@@ -18,6 +18,7 @@ import EditBlog from './Components/EditBlog';
 import BlogDetail from './Components/BlogDetail';
 import SearchResult from './Components/SearchResult';
 import Profile from './Components/Profile';
+import Logout from './Components/Logout';
 function App() {
   const token = useRecoilValue(tokenAtom);
   const [user , setUser] = useRecoilState(userAtom);
@@ -66,6 +67,7 @@ function App() {
       <Route path='/blogdetail/:id' element={<BlogDetail></BlogDetail>}></Route>
       <Route path='/searchresults' element={<SearchResult></SearchResult>}></Route>
       <Route path='/profile' element={<Profile></Profile>}></Route>
+      <Route path='/logout' element={<Logout></Logout>}></Route>
     </Routes>
   </div>
 );

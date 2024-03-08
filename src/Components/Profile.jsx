@@ -1,13 +1,9 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import axios from "axios";
-import { userAtom , tokenAtom } from "../Store/Atoms/user";
-import { useEffect, useState } from "react";
+import {  useRecoilValue } from "recoil";
+import { userAtom  } from "../Store/Atoms/user";
 import NavBar from "./Navbar";  
 import Lottie from "lottie-react"
 import profileAnimation from "../assets/1707831870464.json"
 function Profile(){
-    const [visible  , setVisible] = useState(false);
-    const [profileData , setProfileData] = useState({});
     const user = useRecoilValue(userAtom)
     return(
         <div className="w-screen h-screen bg-slate-500 flex flex-col ">
