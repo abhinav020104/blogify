@@ -230,7 +230,8 @@ router.post("/searchblog" , async(req , res)=>{
         const response = await prisma.post.findMany({
             where:{
                 title:{
-                    contains:searchTitle
+                    contains:searchTitle,
+                    mode:insensitive,
                 },
                 authorId:{
                     not:id
