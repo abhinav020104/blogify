@@ -1,5 +1,6 @@
 import axios from "axios"
 import {useNavigate , useLocation} from "react-router-dom"
+import toast from "react-hot-toast"; 
 const 
 Blog = ({blogData})=>{
     const location = useLocation();
@@ -16,6 +17,11 @@ Blog = ({blogData})=>{
                 data:{}
             })
             console.log(response);
+            if(status){
+                toast.success("Blog Published Successfully")
+            }else{
+                toast.success("Blog Unpublished Successfully");
+            }
             navigate(`/myblogs/${currPath === "publishedblogs" ? "unpublishedblogs" : "publishedblogs"}`);
         }catch(error){
             console.log(error);
@@ -36,6 +42,7 @@ Blog = ({blogData})=>{
                 url:`https://blogify-backend.codewithabhinav.online/api/v1/blog/deleteblog/${blogData.id}`
             })
             console.log(response);
+            toast.success("Blog Deleted Successfully");
             navigate("/myblogs/publishedblogs");
         }catch(error){
             console.log(error);
