@@ -11,8 +11,10 @@ const SearchResult = ()=>{
     const user = useRecoilValue(userAtom)
     console.log(searchData);
     const [searchResult , setSearchResult] = useState([]);
+    const [loading , setLoading] = useState(false)
     const fetchData = async()=>{
         try{
+            setLoading(true);
             toast.loading("fetching search results")
             const response = await axios({
                 method:"post",
@@ -26,8 +28,10 @@ const SearchResult = ()=>{
             setSearchResult(response.data.data);
             toast.success("search results fetched successfully");
             console.log(response.data.data);
+            setLoading(false)
         }catch(error){
             toast.dismiss();
+            setLoading(false)
             toast.error("failed to fetch blogs")
             console.log(error);
         }
@@ -53,9 +57,19 @@ const SearchResult = ()=>{
                     )
                 }
                 {
-                    searchResult.length === 0 &&(
+                    searchResult.length === 0 && loading === false &&(
                         <div className="flex flex-col gap-6 mt-32 items-center justify-center h-[500px] text-2xl font-bold text-black">
                             No Blogs Found For Search Query...
+                        </div>
+                    )
+                }
+                {
+                    loading === true &&(
+                        <div class='flex space-x-2 justify-center items-center bg-white h-screen dark:invert'>
+                            <span class='sr-only'>Loading...</span>
+                            <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+                            <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+                            <div class='h-8 w-8 bg-black rounded-full animate-bounce'></div>
                         </div>
                     )
                 }
