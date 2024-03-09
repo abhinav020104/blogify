@@ -56,7 +56,7 @@ const BlogFeed = () => {
             }
             {
                 loading === true &&(
-                    <div class='flex space-x-2 justify-center items-center bg-white  dark:invert h-full mt-16'>
+                    <div class='flex space-x-2 justify-center items-center bg-slate-400  dark:invert h-full mt-16'>
                     <span class='sr-only'>Loading...</span>
                         <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
                         <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
