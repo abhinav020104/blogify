@@ -20,12 +20,12 @@ function Home(){
                     <div className="w-[30%]">
                         <Lottie animationData={homeAnimtation}></Lottie> 
                     </div>
-                    <div className="flex flex-col items-center bg-slate-500 h-[350px] w-[350px] rounded-md justify-center gap-6">
+                    <div className="flex flex-col items-center bg-slate-500 h-[350px] w-[350px] rounded-md justify-center gap-6 shadow-2xl">
                         <div className="text-xl text-black font-mono font-bold">
                             Write Your Blog Today...
                         </div>
                         <Lottie animationData={writingAnimation} className="w-[250px] h-[200px]"></Lottie>
-                        <button className="bg-yellow-300 p-2 w-[200px] rounded-md font-mono text-black font-semibold hover:scale-95 duration-200" onClick={clickHandler}>Start Writing</button>
+                        <button className="bg-yellow-300 p-2 w-[200px] rounded-md font-mono text-black font-semibold hover:scale-95 duration-200 shadow-xl" onClick={clickHandler}>Start Writing</button>
                     </div>
                 </div>
             </div>

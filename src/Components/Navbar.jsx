@@ -20,7 +20,7 @@ function Navbar(){
         navigate("/searchresults");
     }
     return(
-        <div className="  bg-slate-400 h-[70px] w-screen border-b-2 border-black flex items-center justify-center fixed z-10">
+        <div className="  bg-slate-400 h-[70px] w-screen border-b-2 border-black flex items-center justify-center fixed z-10 shadow-xl">
             <div className="w-[94%] flex items-center h-full justify-between">
                 <a href="/" className="text-slate-800 text-2xl font-xl font-bold font-mono cursor-pointer">Blogify</a>
                 {
