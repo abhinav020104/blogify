@@ -2,6 +2,7 @@ import {useNavigate} from "react-router-dom"
 import { useRecoilState, useRecoilValue , useSetRecoilState } from "recoil";
 import { loadingAtom, searchDataAtom, tokenAtom, userAtom } from "../Store/Atoms/user";
 import { useState } from "react";
+import icon from "../assets/blog_7466122.png"
 function Navbar(){
     const navigate = useNavigate();
     const [token , setToken] = useRecoilState(tokenAtom);
@@ -22,7 +23,8 @@ function Navbar(){
     return(
         <div className="  bg-slate-400 h-[70px] w-screen border-b-2 border-black flex items-center justify-center fixed z-10 shadow-xl">
             <div className="w-[94%] flex items-center h-full justify-between">
-                <a href="/" className="text-slate-800 text-2xl font-xl font-bold font-mono cursor-pointer">Blogify</a>
+                <img src={icon} className="h-[55px] ml-8"></img>
+                <a href="/" className="text-slate-800 text-2xl font-xl font-bold font-mono cursor-pointer -ml-6">Blogify</a>
                 {
                     token === null  && (
                         <div>
