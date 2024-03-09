@@ -29,7 +29,9 @@ function Home(){
                     </div>
                 </div>
             </div>
-            <BlogFeed></BlogFeed>
+            <div className="mb-6">
+                <BlogFeed></BlogFeed>
+            </div>
         </div>
     )
 }
