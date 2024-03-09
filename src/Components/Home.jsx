@@ -13,7 +13,7 @@ function Home(){
         token === null ? navigate("/login") : navigate("/addblog")
     }
     return(
-        <div className="bg-white w-screen  min-h-screen flex flex-col overflow-y-auto">
+        <div className="bg-slate-400 w-screen  min-h-screen flex flex-col overflow-y-auto">
             <Navbar/>
             <div className="w-11/12 mx-auto h-full mt-24">
                 <div className="w-full flex justify-center gap-32 items-center h-[300px] mt-6">

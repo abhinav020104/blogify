@@ -40,14 +40,14 @@ const SearchResult = ()=>{
         fetchData();
     } , [user , searchData])
     return(
-        <div className="w-screen min-h-screen flex-flex-col overflow-y-auto">
+        <div className="w-screen min-h-screen flex-flex-col overflow-y-auto bg-slate-400">
             <Navbar></Navbar>
             <div className="w-11/12 h-full mx-auto">
                 {
                     searchResult.length !== 0 && (
                         <div className="flex flex-col gap-6 mt-32">
                         {searchResult.map((blog, index) => (
-                            <div key={index} className=" border-b-2 border-slate-400 p-2">
+                            <div key={index} className=" border-b-2 border-slate-800 p-2">
                                 <div className="font-bold text-2xl text-black cursor-pointer" onClick={()=>{
                                     navigate(`/blogdetail/${blog.id}`)
                                 }}>{blog.title}</div>
@@ -65,7 +65,7 @@ const SearchResult = ()=>{
                 }
                 {
                     loading === true &&(
-                        <div class='flex space-x-2 justify-center items-center bg-white h-screen dark:invert'>
+                        <div class='flex space-x-2 justify-center items-center bg-slate-400 h-screen dark:invert'>
                             <span class='sr-only'>Loading...</span>
                             <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
                             <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>

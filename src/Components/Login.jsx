@@ -43,7 +43,7 @@ function Login(){
         })
     }
     return(
-        <div className="w-screen h-screen bg-white flex flex-col">
+        <div className="w-screen h-screen bg-slate-white  flex flex-col">
             <Navbar></Navbar>
             <div className=" w-screen h-full flex items-center justify-center gap-32">
                 <div className="w-[300px]">
