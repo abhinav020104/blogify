@@ -22,9 +22,11 @@ function Navbar(){
     }
     return(
         <div className="  bg-slate-400 h-[70px] w-screen border-b-2 border-black flex items-center justify-center fixed z-10 shadow-xl">
-            <div className="w-[94%] flex items-center h-full justify-between">
-                <img src={icon} className="h-[55px] ml-8"></img>
-                <a href="/" className="text-slate-800 text-2xl font-xl font-bold font-mono cursor-pointer -ml-6">Blogify</a>
+            <div className="w-[94%] flex items-center h-full justify-between gap-6">
+                <div className="flex items-center justify-between w-[200px]">
+                    <img src={icon} className="h-[55px] ml-8"></img>
+                    <a href="/" className="text-slate-800 text-2xl font-xl font-bold font-mono cursor-pointer -ml-6">Blogify</a>
+                </div>
                 {
                     token === null  && (
                         <div>
