@@ -81,6 +81,7 @@ const AddBlog = () => {
                 toast.success("Blog published successfully");
                 navigate("/myblogs/publishedblogs");
             } else {
+                toast.dismiss();
                 toast.success("Blog saved as draft");
                 navigate("/myblogs/unpublishedblogs");
             }
@@ -90,7 +91,7 @@ const AddBlog = () => {
         }
     };
 
-    const draftHandler = () => handleBlogSubmission(false);
+    const draftHandler   = () => handleBlogSubmission(false);
     const publishHandler = () => handleBlogSubmission(true);
 
     const exitHandler = () => {
