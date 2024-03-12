@@ -14,7 +14,7 @@ app.get("/" , (req , res)=>{
 app.use(cors());
 app.use("/api/v1/auth" , authRoutes);
 app.use("/api/v1/blog" , blogRoutes);
-app.use("/api/v1/review",commentRoutes);
+app.use("/api/v1/comment",commentRoutes);
 app.listen(4000 , ()=>{
     console.log("server listening at port 4000");
 })

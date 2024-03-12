@@ -3,13 +3,14 @@ const router = express.Router();
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-router.post("/addreview" , async(req , res) =>{
+router.post("/addcomment" , async(req , res) =>{
     try{
-        const {content , postId} = req.body;
+        const {content , postId , userId} = req.body;
         const response = await prisma.comment.create({
             data:{
                 content:content,
-                postId:postId,   
+                postId:postId, 
+                userId
             }
         })
         return res.status(200).json({
@@ -23,6 +24,30 @@ router.post("/addreview" , async(req , res) =>{
             success:false,
             message:"Failed to post the review"
         })
+    }
+})
+
+router.post("/fetchusercomment" , async(req,res)=>{
+    try{
+        const {postId , userId} = req.body
+        const commentData = await prisma.comment.findUnique({
+            where:{
+                id :postId,
+                userId,
+            }
+        })
+        return res.status(200).json({
+            success:true,
+            message:"user comment fetched successfully",
+            data:commentData
+        })
+    }catch(error){
+        console.log(error);
+        return res.status(500).json({
+            success:false,
+            message:"Failed to fetch comment"
+        }
+        )
     }
 })
 
