@@ -132,7 +132,7 @@ const BlogDetail = () => {
                                 {blog.Comments.map((comment) => (
                                     <div key={comment.id} className="border border-gray-200 rounded-md p-4 mb-4">
                                         <div className="flex justify-between items-center">
-                                            <div className="font-semibold text-lg">{comment.userId === user.id ? "Your Comment" : "Anonymous"}</div>
+                                            <div className="font-semibold text-lg">{comment.userId === user.id ? "Your Comment" : `${comment.fName} ${comment.LName}`}</div>
                                             {comment.userId === user.id && (
                                                 <button className="text-red-500 hover:text-red-700" onClick={() => deleteCommentHandler(comment.id)}>Delete</button>
                                             )}
