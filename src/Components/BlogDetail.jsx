@@ -8,9 +8,11 @@ const BlogDetail = () => {
     const id = location.pathname.split("/").at(-1);
     console.log(id);
     const [blog , setBlog] = useState({});
+    const [loading , setLoading] = useState(true);
     const fetchData = async () => {
         toast.loading("Fetching blog Details")
         try {
+            setLoading(true);
             const blogData = await axios({
                 method: "get",
                 url: `https://blogify-ds91.onrender.com/api/v1/blog/fetchblog/${id}`
@@ -25,6 +27,7 @@ const BlogDetail = () => {
             // })
             toast.dismiss();
             toast.success("Blog fetched successfully")
+            setLoading(false);  
             setBlog(blogData.data.data);
         } catch (error) {
             toast.dismiss(); 
@@ -52,6 +55,26 @@ const BlogDetail = () => {
                     </div>
                     <textarea name="comment" id="" cols="30" rows="5" className="border-[1px] border-black rounded-md p-4 text-black" placeholder="Write Your Comment"></textarea>
                     <button className="w-[150px] p-2 font-bold text-black bg-red-500 font-mono rounded-md hover:scale-95 duration-200">Post Comment</button>
+                </div>
+                <div>
+                    {
+                        loading === false  && blog.Comments.length !== 0 &&(
+                            blog.Comments.map((comment)=>{
+                                return(
+                                    <div>
+                                        {comment.content}
+                                    </div>
+                                )
+                            })
+                        )
+                    }
+                    {
+                        loading === false  && blog.Comments.length === 0 &&(
+                            <div className="w-full mx-auto text-center font-bold text-xl text-black">
+                                No Comments Found ...
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>
