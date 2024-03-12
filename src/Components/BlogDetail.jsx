@@ -23,7 +23,7 @@ const BlogDetail = () => {
             });
             const userCommentData = await axios({
                 method:"post",
-                url:"http://localhost:4000/api/v1/comment/fetchusercomment",
+                url:"https://blogify-ds91.onrender.com/comment/fetchusercomment",
                 data:{
                     postId : id,
                     userId : user.id
@@ -58,7 +58,7 @@ const BlogDetail = () => {
             toast.loading("posting comment")
             const res = await axios({
                 method:"post",
-                url:"http://localhost:4000/api/v1/comment/addcomment",
+                url:"https://blogify-ds91.onrender.com/api/v1/comment/addcomment",
                 data:{
                     content:commentData,
                     postId : id,
@@ -86,7 +86,7 @@ const BlogDetail = () => {
                             <div dangerouslySetInnerHTML={createMarkup(blog.content)} className="text-black font-semibold py-4" />
                             <div className="w-full flex flex-col gap-2 mb-3">
                             {
-                                loading  === false && userComment !== null &&(
+                                loading  === false && userComment === null &&(
                                     <div className="w-full flex flex-col gap-6">
                                         <div className="text-black font-bold text-xl underline">
                                 Add Comment
