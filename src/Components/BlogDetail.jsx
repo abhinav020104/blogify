@@ -78,7 +78,7 @@ const BlogDetail = () => {
             toast.loading("Deleting comment"); 
             const res = await axios({
                 method:"post",
-                url:"http://localhost:4000/api/v1/comment/deletecomment",
+                url:"https://blogify-ds91.onrender.com/api/v1/comment/deletecomment",
                 data:{
                     id
                 }
