@@ -23,7 +23,7 @@ const BlogDetail = () => {
             });
             const userCommentData = await axios({
                 method:"post",
-                url:"https://blogify-ds91.onrender.com/comment/fetchusercomment",
+                url:"https://blogify-ds91.onrender.com/api/v1/comment/fetchusercomment",
                 data:{
                     postId : id,
                     userId : user.id
