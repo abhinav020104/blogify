@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "../Store/Atoms/user";
+
 const BlogDetail = () => {
     const location = useLocation(); 
     const id = location.pathname.split("/").at(-1);
@@ -52,27 +53,31 @@ const BlogDetail = () => {
     const changeHandler = (e)=>{
         setCommentData(e.target.value)
     }
+    
     const addCommentHandler = async()=>{
         try{
-            toast.loading("posting comment")
+            toast.loading("Posting comment")
             const res = await axios({
                 method:"post",
                 url:"https://blogify-ds91.onrender.com/api/v1/comment/addcomment",
                 data:{
                     content:commentData,
                     postId : id,
-                    userId : user.id
+                    userId : user.id,
+                    fName :  user.firstName,
+                    LName  : user.lastName,
                 }
             })
             await fetchData();
             toast.dismiss();
-            toast.success("comment added successfully")
+            toast.success("Comment added successfully")
         }catch(error){
             toast.dismiss()
-            toast.error("failed to add comment")
+            toast.error("Failed to add comment")
             console.log(error);
         }
     }
+    
     const deleteCommentHandler = async(id)=>{
         try{
             toast.loading("Deleting comment"); 
@@ -85,12 +90,13 @@ const BlogDetail = () => {
             })
             fetchData();
             toast.dismiss(); 
-            toast.success("comment deleted successfully");
+            toast.success("Comment deleted successfully");
         }catch(error){
             toast.dismiss();
             toast.error("Failed to delete comment");
         }
     }
+    
     return (
         <div className="w-screen min-h-screen overscroll-y-auto flex flex-col">
             <Navbar />
@@ -106,10 +112,10 @@ const BlogDetail = () => {
                                 loading  === false && userComment === null &&(
                                     <div className="w-full flex flex-col gap-6">
                                         <div className="text-black font-bold text-xl underline">
-                                Add Comment
-                            </div>
-                            <textarea name="comment" id="" cols="30" rows="5" className="border-[1px] border-black rounded-md p-4 text-black" placeholder="Write Your Comment" onChange={changeHandler}></textarea>
-                            <button className="w-[150px] p-2 font-bold text-black bg-red-500 font-mono rounded-md hover:scale-95 duration-200" onClick={addCommentHandler}>Post Comment</button>
+                                            Add Comment
+                                        </div>
+                                        <textarea name="comment" id="" cols="30" rows="5" className="border-[1px] border-black rounded-md p-4 text-black" placeholder="Write Your Comment" onChange={changeHandler}></textarea>
+                                        <button className="w-[150px] p-2 font-bold text-black bg-red-500 font-mono rounded-md hover:scale-95 duration-200" onClick={addCommentHandler}>Post Comment</button>
                                     </div>
                                 )
                             }
@@ -121,37 +127,20 @@ const BlogDetail = () => {
                 <div>
                     {
                         loading === false  && blog.Comments.length !== 0 &&(
-                            blog.Comments.map((comment)=>{
-                                return(
-                                    <div>
-                                        {
-                                            comment.userId === user.id && (
-                                                <div className="flex flex-col gap-3">
-                                                    <div className="font-bold text-mono underline text-black text-l">
-                                                        Your Comment
-                                                    </div>
-                                                    <div className="font-semibold text-xl text-slate-700">
-                                                        {comment.content}
-                                                    </div>
-                                                    <div className="flex text-[14px]">
-                                                        <div className="w-[50px]  font-bold text-blackfont-mono rounded-md hover:scale-95 duration-200 text-sm underline cursor-pointer" onClick={()=>{
-                                                            deleteCommentHandler(comment.id)
-                                                        }}>Delete</div>
-                                                    </div>
-                                                </div>
-                                            )
-                                        }
-                                        { 
-                                            comment.userId !== user.id && (
-                                                <div className="font-semibold text-l text-black">
-                                                    {comment.content}
-                                                </div>
-                                            ) 
-                                            
-                                        }
+                            <div className="mt-8">
+                                <h2 className="text-2xl font-bold mb-4">Comments</h2>
+                                {blog.Comments.map((comment) => (
+                                    <div key={comment.id} className="border border-gray-200 rounded-md p-4 mb-4">
+                                        <div className="flex justify-between items-center">
+                                            <div className="font-semibold text-lg">{comment.userId === user.id ? "Your Comment" : "Anonymous"}</div>
+                                            {comment.userId === user.id && (
+                                                <button className="text-red-500 hover:text-red-700" onClick={() => deleteCommentHandler(comment.id)}>Delete</button>
+                                            )}
+                                        </div>
+                                        <p className="mt-2">{comment.content}</p>
                                     </div>
-                                )
-                            })
+                                ))}
+                            </div>
                         )
                     }
                     {
@@ -163,11 +152,11 @@ const BlogDetail = () => {
                     }
                     {
                     loading === true &&(
-                        <div class='flex space-x-2 justify-center items-center bg-white h-screen dark:invert mb-20'>
-                            <span class='sr-only'>Loading...</span>
-                            <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
-                            <div class='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
-                            <div class='h-8 w-8 bg-black rounded-full animate-bounce'></div>
+                        <div className='flex space-x-2 justify-center items-center bg-white h-screen dark:invert mb-20'>
+                            <span className='sr-only'>Loading...</span>
+                            <div className='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
+                            <div className='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
+                            <div className='h-8 w-8 bg-black rounded-full animate-bounce'></div>
                         </div>
                     )
                     }

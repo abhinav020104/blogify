@@ -5,12 +5,14 @@ const prisma = new PrismaClient();
 
 router.post("/addcomment" , async(req , res) =>{
     try{
-        const {content , postId , userId} = req.body;
+        const {content , postId , userId , fName , LName} = req.body;
         const response = await prisma.comment.create({
             data:{
                 content:content,
                 postId:postId, 
-                userId
+                userId,
+                fName,
+                LName,
             }
         })
         return res.status(200).json({
