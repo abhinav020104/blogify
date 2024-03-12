@@ -15,13 +15,14 @@ const BlogDetail = () => {
                 method: "get",
                 url: `https://blogify-ds91.onrender.com/api/v1/blog/fetchblog/${id}`
             });
-            const reviewData = await axios({
-                method:"post",
-                url:"",
-                data:{
+            console.log(blogData);
+            // const reviewData = await axios({
+            //     method:"post",
+            //     url:"",
+            //     data:{
 
-                }
-            })
+            //     }
+            // })
             toast.dismiss();
             toast.success("Blog fetched successfully")
             setBlog(blogData.data.data);

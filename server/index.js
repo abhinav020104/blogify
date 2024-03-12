@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const authRoutes = require("./Routes/Auth");
 const blogRoutes = require("./Routes/Blogs");
-const reviewRoutes = require("./Routes/Reviews");
+const commentRoutes = require("./Routes/Comments");
 const cors = require("cors"); 
 app.use(express.json()); 
 app.get("/" , (req , res)=>{
@@ -14,7 +14,7 @@ app.get("/" , (req , res)=>{
 app.use(cors());
 app.use("/api/v1/auth" , authRoutes);
 app.use("/api/v1/blog" , blogRoutes);
-app.use("/api/v1/review",reviewRoutes);
+app.use("/api/v1/review",commentRoutes);
 app.listen(4000 , ()=>{
     console.log("server listening at port 4000");
 })
