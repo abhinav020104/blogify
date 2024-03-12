@@ -14,7 +14,7 @@ const PublishedBlogs = ()=>{
             setLoading(true)
             const response =  await axios({
                 method:"get",
-                url:`https://blogify-backend.codewithabhinav.online/api/v1/blog/getpublisheduserblogs/${user.id}`
+                url:`https://blogify-ds91.onrender.com/api/v1/blog/getpublisheduserblogs/${user.id}`
             })
             console.log(response.data.data);
             setBlogs(response.data.data);
