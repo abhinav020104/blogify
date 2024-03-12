@@ -51,4 +51,24 @@ router.post("/fetchusercomment" , async(req,res)=>{
     }
 })
 
+router.post("/deletecomment" , async(req , res)=>{
+    try{
+        const  {id} =  req.body
+        const response = await prisma.comment.delete({
+            where:{
+                id:id
+            }
+        })
+        return res.status(200).json({
+            success:true,
+            message:"Comment deleted successfully"
+        })
+    }catch(error){
+        console.log(error); 
+        return res.status(500).json({
+            success:false,
+            message:"Failed to delete comment"
+        })
+    }
+})
 module.exports = router;

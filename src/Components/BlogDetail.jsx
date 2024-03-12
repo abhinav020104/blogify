@@ -73,6 +73,24 @@ const BlogDetail = () => {
             console.log(error);
         }
     }
+    const deleteCommentHandler = async(id)=>{
+        try{
+            toast.loading("Deleting comment"); 
+            const res = await axios({
+                method:"post",
+                url:"http://localhost:4000/api/v1/comment/deletecomment",
+                data:{
+                    id
+                }
+            })
+            fetchData();
+            toast.dismiss(); 
+            toast.success("comment deleted successfully");
+        }catch(error){
+            toast.dismiss();
+            toast.error("Failed to delete comment");
+        }
+    }
     return (
         <div className="w-screen min-h-screen overscroll-y-auto flex flex-col">
             <Navbar />
@@ -106,7 +124,31 @@ const BlogDetail = () => {
                             blog.Comments.map((comment)=>{
                                 return(
                                     <div>
-                                        {comment.content}
+                                        {
+                                            comment.userId === user.id && (
+                                                <div className="flex flex-col gap-3">
+                                                    <div className="font-bold text-mono underline text-black text-l">
+                                                        Your Comment
+                                                    </div>
+                                                    <div className="font-semibold text-xl text-slate-700">
+                                                        {comment.content}
+                                                    </div>
+                                                    <div className="flex text-[14px]">
+                                                        <div className="w-[50px]  font-bold text-blackfont-mono rounded-md hover:scale-95 duration-200 text-sm underline cursor-pointer" onClick={()=>{
+                                                            deleteCommentHandler(comment.id)
+                                                        }}>Delete</div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
+                                        { 
+                                            comment.userId !== user.id && (
+                                                <div className="font-semibold text-l text-black">
+                                                    {comment.content}
+                                                </div>
+                                            ) 
+                                            
+                                        }
                                     </div>
                                 )
                             })
