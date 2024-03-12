@@ -36,6 +36,7 @@ const BlogDetail = () => {
             toast.success("Blog fetched successfully")
             setLoading(false);  
             setBlog(blogData.data.data);
+            console.log(blog);
         } catch (error) {
             toast.dismiss(); 
             console.log(error); 
@@ -132,9 +133,12 @@ const BlogDetail = () => {
                                 {blog.Comments.map((comment) => (
                                     <div key={comment.id} className="border border-gray-200 rounded-md p-4 mb-4">
                                         <div className="flex justify-between items-center">
-                                            <div className="font-semibold text-lg">{comment.userId === user.id ? "Your Comment" : `${comment.fName} ${comment.LName}`}</div>
+                                            <div className="flex">
+                                                <div className="font-semibold text-lg">{comment.userId === user.id ? "Your Comment" : `${comment.fName} ${comment.LName}`}</div>
+                                                {/* <div>{comment.userId === blog}</div> */}
+                                            </div>
                                             {comment.userId === user.id && (
-                                                <button className="text-red-500 hover:text-red-700" onClick={() => deleteCommentHandler(comment.id)}>Delete</button>
+                                                <button className="text-red-500 hover:text-red-700 font-bold" onClick={() => deleteCommentHandler(comment.id)}>Delete</button>
                                             )}
                                         </div>
                                         <p className="mt-2">{comment.content}</p>

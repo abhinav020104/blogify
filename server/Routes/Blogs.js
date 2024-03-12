@@ -70,6 +70,7 @@ router.get("/fetchblog/:id" , async(req , res)=>{
                 content:true,
                 author:{
                     select:{
+                        id:true,
                         firstName:true,
                         lastName:true
                     }
