@@ -30,10 +30,10 @@ router.post("/addcomment" , async(req , res) =>{
 router.post("/fetchusercomment" , async(req,res)=>{
     try{
         const {postId , userId} = req.body
-        const commentData = await prisma.comment.findUnique({
+        const commentData = await prisma.comment.findFirst({
             where:{
-                id :postId,
-                userId,
+                postId :postId,
+                userId : userId,
             }
         })
         return res.status(200).json({

@@ -11,7 +11,7 @@ const BlogDetail = () => {
     const user = useRecoilValue(userAtom);
     const [blog , setBlog] = useState({});
     const [loading , setLoading] = useState(true);
-    const [ userComment , SetuserComment] = useState(null);
+    const [ userComment , SetuserComment] = useState({});
     const [commentData , setCommentData] = useState("");
     const fetchData = async () => {
         toast.loading("Fetching blog Details")
@@ -29,9 +29,8 @@ const BlogDetail = () => {
                     userId : user.id
                 }
             })
-            console.log(userCommentData);
-            SetuserComment(userCommentData)
-            console.log(blogData);
+            SetuserComment(userCommentData.data.data)
+            console.log(userCommentData.data.data);
             toast.dismiss();
             toast.success("Blog fetched successfully")
             setLoading(false);  
