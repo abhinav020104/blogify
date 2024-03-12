@@ -8,9 +8,10 @@ import loadingAnimation from "../assets/1709725446570.json"
 const PublishedBlogs = ()=>{
     const user = useRecoilValue(userAtom);
     const [blogs , setBlogs] = useState([]);
-    const [loading , setLoading] =  useState(true);
+    const [loading , setLoading] =  useState(false);
     const fetchData = async ()=>{
         try{
+            setLoading(true)
             const response =  await axios({
                 method:"get",
                 url:`https://blogify-backend.codewithabhinav.online/api/v1/blog/getpublisheduserblogs/${user.id}`

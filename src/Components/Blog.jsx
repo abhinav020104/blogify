@@ -1,24 +1,24 @@
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
-import { useState } from "react"; // Import useState hook for managing modal state
+import { useState } from "react";
 
 const Blog = ({ blogData }) => {
     const location = useLocation();
     const navigate = useNavigate();
     const currPath = location.pathname.split("/").at(-1);
-
-    // State to control the visibility of the delete confirmation modal
+    const [loading , setLoading] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     const publishHandler = async () => {
         try {
+            setLoading(true);
             console.log(blogData);
             const status = !blogData.published;
             console.log(status);
             const response = await axios({
                 method: "put",
-                url: `https://blogify-backend.codewithabhinav.online/api/v1/blog/changepublishstatus/${blogData.id}/${status}`,
+                url: `https://blogify-ds91.onrender.com/api/v1/blog/changepublishstatus/${blogData.id}/${status}`,
                 data: {},
             });
             console.log(response);
@@ -47,29 +47,30 @@ const Blog = ({ blogData }) => {
         }
     };
 
-    // Function to show the delete confirmation modal
+
     const showDeleteConfirmation = () => {
         setShowDeleteModal(true);
     };
 
-    // Function to handle deleting the blog
+
     const handleDeleteBlog = async () => {
         try {
+            setLoading(true);
             toast.loading("Deleting Blog");
             const response = await axios({
                 method: "delete",
-                url: `https://blogify-backend.codewithabhinav.online/api/v1/blog/deleteblog/${blogData.id}`,
+                url: `https://blogify-ds91.onrender.com/api/v1/blog/deleteblog/${blogData.id}`,
             });
             console.log(response);
             toast.dismiss();
             toast.success("Blog Deleted Successfully");
-            navigate("/myblogs/publishedblogs");
+            setLoading(false);
         } catch (error) {
             console.log(error);
         }
     };
 
-    // Function to hide the delete confirmation modal
+
     const hideDeleteConfirmation = () => {
         setShowDeleteModal(false);
     };
@@ -101,7 +102,6 @@ const Blog = ({ blogData }) => {
                     </button>
                 </div>
             </div>
-            {/* Delete Confirmation Modal */}
             {showDeleteModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-4 rounded-md">

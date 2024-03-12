@@ -5,7 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["fullTextSearch"]
 }
 
@@ -15,8 +15,8 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(uuid())
-  email     String     @unique
+  id        String  @id @default(uuid())
+  email     String  @unique
   firstName String
   lastName  String
   password  String
@@ -25,12 +25,18 @@ model User {
 }
 
 model Post {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   title     String
   content   String
-  published Boolean @default(false)
+  published Boolean  @default(false)
   authorId  String
-  author    User    @relation(fields: [authorId] , references: [id])
+  author    User     @relation(fields: [authorId], references: [id])
+  Reviews    Review[]
 }
 
-
+model Review {
+  id      String @id @default(uuid())
+  content String
+  postId  String
+  post    Post   @relation(fields: [postId], references: [id])
+}

@@ -70,7 +70,7 @@ const AddBlog = () => {
             }else{
                 toast.loading("Saving Blog as draft")
             }
-            const response = await axios.post("https://blogify-backend.codewithabhinav.online/api/v1/blog/addblog", {
+            const response = await axios.post("https://blogify-ds91.onrender.com/api/v1/blog/addblog", {
                 userId: user.id,
                 title: title,
                 content: content,

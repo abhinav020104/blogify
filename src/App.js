@@ -30,7 +30,7 @@ function App() {
         setLoading(true);
         const userDetails = await axios({
           method:"post",
-          url:"https://blogify-backend.codewithabhinav.online/api/v1/auth/getuserdetails",
+          url:"https://blogify-ds91.onrender.com/api/v1/auth/getuserdetails",
           data:{
             token:token
           }

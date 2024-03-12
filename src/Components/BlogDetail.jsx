@@ -13,7 +13,7 @@ const BlogDetail = () => {
         try {
             const blogData = await axios({
                 method: "get",
-                url: `https://blogify-backend.codewithabhinav.online/api/v1/blog/fetchblog/${id}`
+                url: `https://blogify-ds91.onrender.com/api/v1/blog/fetchblog/${id}`
             });
             toast.dismiss();
             toast.success("Blog fetched successfully")
