@@ -73,7 +73,8 @@ router.get("/fetchblog/:id" , async(req , res)=>{
                         firstName:true,
                         lastName:true
                     }
-                }
+                },
+                Comments:true
             }
         })
         if(!blog){

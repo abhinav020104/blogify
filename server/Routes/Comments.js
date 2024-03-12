@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 router.post("/addreview" , async(req , res) =>{
     try{
         const {content , postId} = req.body;
-        const response = await prisma.review.create({
+        const response = await prisma.comment.create({
             data:{
                 content:content,
                 postId:postId,   

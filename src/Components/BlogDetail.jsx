@@ -15,6 +15,13 @@ const BlogDetail = () => {
                 method: "get",
                 url: `https://blogify-ds91.onrender.com/api/v1/blog/fetchblog/${id}`
             });
+            const reviewData = await axios({
+                method:"post",
+                url:"",
+                data:{
+
+                }
+            })
             toast.dismiss();
             toast.success("Blog fetched successfully")
             setBlog(blogData.data.data);
@@ -38,6 +45,13 @@ const BlogDetail = () => {
             <div className="w-11/12 mx-auto mt-32">
                 <div className="border-b-2 border-black py-4 font-bold text-xl">{blog.title}</div>
                 <div dangerouslySetInnerHTML={createMarkup(blog.content)} className="text-black font-semibold py-4" />
+                <div className="w-full flex flex-col gap-2 mb-3">
+                    <div className="text-black font-bold text-xl underline">
+                        Add Comment
+                    </div>
+                    <textarea name="comment" id="" cols="30" rows="5" className="border-[1px] border-black rounded-md p-4 text-black" placeholder="Write Your Comment"></textarea>
+                    <button className="w-[150px] p-2 font-bold text-black bg-red-500 font-mono rounded-md hover:scale-95 duration-200">Post Comment</button>
+                </div>
             </div>
         </div>
     );
