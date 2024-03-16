@@ -52,6 +52,7 @@ const EditBlog = () => {
             'eraser',
             'fullsize',
             'print',
+            'image',
         ],
         height: 500
     }), []);

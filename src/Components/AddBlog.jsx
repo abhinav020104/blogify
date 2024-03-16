@@ -49,11 +49,14 @@ const AddBlog = () => {
             'eraser',
             'fullsize',
             'print',
+            'image',
         ],
-        height: 500
+        height: 500,
+        // uploader: {
+        //     insertImageAsBase64URI: true, 
+        // },
     }), []);
-
-    const validateInputs = () => {
+   const validateInputs = () => {
         if (!title.trim() || !content.trim()) {
             toast.error("Fields cannot be empty");
             return false;
@@ -86,6 +89,7 @@ const AddBlog = () => {
                 navigate("/myblogs/unpublishedblogs");
             }
         } catch (error) {
+            toast.dismiss();
             console.error(error);
             toast.error(published ? "Failed to publish blog" : "Failed to save blog as draft");
         }

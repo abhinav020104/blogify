@@ -27,13 +27,7 @@ const Blog = ({ blogData }) => {
             } else {
                 toast.success("Blog Unpublished Successfully");
             }
-            navigate(
-                `/myblogs/${
-                    currPath === "publishedblogs"
-                        ? "unpublishedblogs"
-                        : "publishedblogs"
-                }`
-            );
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }
@@ -65,6 +59,8 @@ const Blog = ({ blogData }) => {
             toast.dismiss();
             toast.success("Blog Deleted Successfully");
             setLoading(false);
+            setShowDeleteModal(false);
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }
