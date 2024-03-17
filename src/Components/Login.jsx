@@ -3,12 +3,13 @@ import LoginAnimation from "../assets/1709405739948.json"
 import Lottie from "lottie-react"
 import { useState } from "react"
 import axios from "axios"
-import { useSetRecoilState } from "recoil"
-import { tokenAtom, userAtom } from "../Store/Atoms/user"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import { hamburgermenuClickedAtom, tokenAtom, userAtom } from "../Store/Atoms/user"
 import {useNavigate} from "react-router-dom"
 import { FaRegEye } from "react-icons/fa6";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import toast from "react-hot-toast"
+import HamburgerMenu from "./HamburgerMenu"
 function Login(){
     const [loginData , setLoginData] =  useState({});
     const setToken = useSetRecoilState(tokenAtom);
@@ -42,14 +43,18 @@ function Login(){
             [e.target.name] : e.target.value
         })
     }
+    const hamburgerMenuClicked = useRecoilValue(hamburgermenuClickedAtom)
     return(
-        <div className="w-screen h-screen bg-slate-white  flex flex-col">
+        <div className="w-screen h-screen bg-slate-white  flex flex-col ">
             <Navbar></Navbar>
-            <div className=" w-screen h-full flex items-center justify-center gap-32">
-                <div className="w-[300px]">
+            {
+                hamburgerMenuClicked === false && (
+                    <div>
+                        <div className=" w-screen h-full flex items-center justify-center gap-32 min-[320px]:flex-col min-[320px]:gap-8 mt-9">
+                <div className="w-[300px] min-[320px]:h-[100px] min-[320px]:w-[150px]">
                     <Lottie animationData={LoginAnimation}/>
                 </div>
-                <div className="flex flex-col w-[400px] bg-slate-400 h-[400px] rounded-md items-center shadow-xl">
+                <div className="flex flex-col w-[400px] bg-slate-400 h-[400px] rounded-md items-center shadow-xl min-[320px]:h-[400px] min-[320px]:w-[350px]">
                     <form className="flex flex-col  items-center gap-8 w-11/12">
                         <div className="text-2xl font-sans font-bold mt-6 tracking-normal">
                             Login
@@ -84,6 +89,14 @@ function Login(){
                     <button className="bg-slate-700 text-white w-[125px] p-2 rounded-md hover:scale-95 duration-200 mt-12 cursor-pointer shadow-lg" onClick={loginHandler}>Login</button>
                 </div>
             </div>
+                    </div>
+                )
+            }
+            {
+                hamburgerMenuClicked === true &&(
+                    <HamburgerMenu/>
+                )
+            }
         </div>
     )
 }

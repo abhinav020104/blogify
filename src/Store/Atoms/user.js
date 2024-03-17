@@ -19,4 +19,9 @@ const searchDataAtom = atom({
     key:"searchDataAtom",
     default:{}
 })
-export {tokenAtom , userAtom , loadingAtom , searchDataAtom};
+
+const hamburgermenuClickedAtom = atom({
+    key:"hamburgermenuClickedAton",
+    default:false,
+})
+export {tokenAtom , userAtom , loadingAtom , searchDataAtom  , hamburgermenuClickedAtom};
