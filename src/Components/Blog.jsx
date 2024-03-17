@@ -72,12 +72,12 @@ const Blog = ({ blogData }) => {
     };
 
     return (
-        <div className="flex flex-col w-full mx-auto  font-mono ">
-            <div className="flex  w-full  justify-around text-black font-bold  border-b-2  border-slate-400 items-center">
-                <div className=" p-4 flex w-[900px] justify-between ">
+        <div className="flex flex-col w-full mx-auto  font-mono">
+            <div className="flex  w-full  justify-around text-black font-bold  border-b-2  border-slate-400 items-center max-[640px]:flex-col ">
+                <div className=" p-4 flex w-[900px] justify-between max-[640px]:w-full">
                     {blogData.title}
                 </div>
-                <div className=" p-4 flex w-[250px] justify-between gap-6 tracking-wider">
+                <div className=" p-4 flex w-[250px] justify-between gap-6 tracking-wider max-[640px]:w-full max-[640px]:flex-col">
                     <button
                         className="bg-green-500 text-black p-2 rounded-md hover:scale-95 duration-200"
                         onClick={publishHandler}

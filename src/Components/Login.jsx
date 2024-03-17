@@ -53,7 +53,7 @@ function Login() {
       <Navbar />
       {hamburgerMenuClicked === false && (
         <div>
-          <div className="w-screen h-full flex items-center justify-center gap-32 max-[400px]:flex-col max-[400px]:gap-8 mt-9">
+          <div className="w-screen h-full flex items-center justify-center gap-32 max-[400px]:flex-col max-[400px]:gap-8 mt-32 max-[640px]:mt9">
             <div className="w-[300px] max-[400px]:h-[100px] max-[400px]:w-[150px]">
               <Lottie animationData={LoginAnimation} />
             </div>

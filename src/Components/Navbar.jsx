@@ -48,6 +48,9 @@ function Navbar() {
             src={icon}
             className="h-[55px] ml-8 max-[400px]:ml-1"
             alt="Blogify Icon"
+            onClick={()=>{
+                navigate("/")
+            }}
           />
           <a
             href="/"
