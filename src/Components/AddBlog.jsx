@@ -103,7 +103,7 @@ const AddBlog = () => {
     };
 
     return (
-        <div className="flex flex-col h-screen overflow-auto">
+        <div className="flex flex-col min-h-screen overflow-auto">
             <nav className="bg-slate-400 text-black p-2 font-mono">
                 <div className="container mx-auto">
                     <h1 className="text-2xl font-bold">Create a New Blog</h1>
@@ -124,7 +124,7 @@ const AddBlog = () => {
                 </form>
             </div>
 
-            <div className=" mb-10 flex justify-center gap-6 tracking-wider overflow-auto">
+            <div className=" mb-10 flex justify-center gap-6 tracking-wider overflow-y-scroll max-[400px]:mt-2 ">
                 <button onClick={draftHandler} className="bg-green-500 text-black p-2 w-[150px] rounded-md hover:scale-95 duration-200" >
                     Save Draft
                 </button>
