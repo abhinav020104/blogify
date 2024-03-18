@@ -85,7 +85,7 @@ const BlogDetail = () => {
     return (
         <div className="w-screen h-screen overflow-y-auto flex flex-col">
             <Navbar />
-            <div className="w-11/12 mx-auto mt-32">
+            <div className="w-11/12 mx-auto mt-16">
                 {loading === false && (
                     <div>
                         <div className="border-b-2 border-black py-4 font-bold text-xl">{blog.title}</div>
@@ -138,7 +138,7 @@ const BlogDetail = () => {
                     )}
                     {loading && (
                         <div>
-                            <div className="flex space-x-2 justify-center items-center bg-white h-screen dark:invert max-[650px]:hidden">
+                            <div className="flex space-x-2 justify-center items-center bg-white dark:invert mt-16 max-[650px]:hidden">
                                 <span className="sr-only">Loading...</span>
                                 <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                                 <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></div>

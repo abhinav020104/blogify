@@ -18,7 +18,7 @@ function Home() {
   };
 
   return (
-    <div className="bg-slate-400 w-screen h-screen flex flex-col overflow-y-auto">
+    <div className="bg-slate-400 w-screen min-h-screen flex flex-col overflow-y-scroll">
       <Navbar />
       {hamburgerMenuClicked === true && <HamburgerMenu />}
       {hamburgerMenuClicked === false && (
