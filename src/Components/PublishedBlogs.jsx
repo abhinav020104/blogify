@@ -48,7 +48,7 @@ const PublishedBlogs = ()=>{
         }
         {
             loading === false && blogs.length === 0 &&(
-                <div className="flex w-full h-[400px] items-center justify-center font-bold text-black text-2xl max-[400px]:ml-5 ">
+                <div className="flex w-full h-[400px] items-center justify-center font-bold text-black text-2xl max-[640px]:ml-5 ">
                     No  Blogs 
                 </div>
             )

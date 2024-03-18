@@ -115,7 +115,7 @@ const AddBlog = () => {
                 </form>
             </div>
 
-            <div className="mb-10 flex justify-center gap-6 tracking-wider overflow-y-scroll max-[400px]:mt-2 ">
+            <div className="mb-10 flex justify-center gap-6 tracking-wider overflow-y-scroll max-[640px]:mt-2 ">
                 <button onClick={draftHandler} className="bg-green-500 text-black p-2 w-[150px] rounded-md hover:scale-95 duration-200">
                     Save Draft
                 </button>

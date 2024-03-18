@@ -50,11 +50,11 @@ function Signup() {
       {!hamburgerMenuClicked && (
         <div className="mt-32 w-screen h-full flex items-center justify-center gap-32">
           {/* Signup Animation */}
-          <div className="w-[500px] max-[400px]:hidden">
+          <div className="w-[500px] max-[640px]:hidden">
             <Lottie animationData={signUpAnimation} />
           </div>
           {/* Signup Form Container */}
-          <div className="w-[500px] h-[500px] bg-slate-400 rounded-md shadow-xl flex flex-col items-center max-[400px]:h-[660px] max-[400px]:w-[350px]">
+          <div className="w-[500px] h-[500px] bg-slate-400 rounded-md shadow-xl flex flex-col items-center max-[640px]:h-[660px] max-[640px]:w-[350px]">
             <form className="flex flex-col items-center gap-6 w-11/12">
               {/* Signup Title */}
               <div className="font-bold text-black text-xl tracking-wide mt-6">
