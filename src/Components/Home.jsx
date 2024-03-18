@@ -25,7 +25,7 @@ function Home() {
         <div>
           <div className="w-11/12 mx-auto h-full mt-24 flex flex-col">
             <div className="w-full flex justify-center gap-32 items-center h-[300px] mt-6 ">
-              <div className="w-[30%] max-[400px]:hidden">
+              <div className="w-[30%] max-[640px]:hidden">
                 <Lottie animationData={homeAnimtation} />
               </div>
               <div className="flex flex-col items-center bg-slate-500 h-[350px] w-[350px] rounded-md justify-center gap-6 shadow-2xl">
