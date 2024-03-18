@@ -1,10 +1,11 @@
 import { useRecoilValue } from "recoil";
-import { searchDataAtom, userAtom } from "../Store/Atoms/user";
+import { hamburgermenuClickedAtom, searchDataAtom, userAtom } from "../Store/Atoms/user";
 import Navbar from "./Navbar";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import HamburgerMenu from "./HamburgerMenu";
 
 const SearchResult = () => {
     const navigate = useNavigate();
@@ -12,7 +13,7 @@ const SearchResult = () => {
     const user = useRecoilValue(userAtom);
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    const hamburgermenuClicked = useRecoilValue(hamburgermenuClickedAtom)
     const fetchData = async () => {
         try {
             setLoading(true);
@@ -41,7 +42,10 @@ const SearchResult = () => {
     return (
         <div className="w-screen min-h-screen flex flex-col overflow-y-auto bg-slate-400">
             <Navbar />
-            <div className="w-11/12 h-full mx-auto">
+            {
+                hamburgermenuClicked === false && (
+                    <div>
+                        <div className="w-11/12 h-full mx-auto">
                 {searchResult.length !== 0 && (
                     <div className="flex flex-col gap-6 mt-32">
                         {searchResult.map((blog, index) => (
@@ -72,6 +76,14 @@ const SearchResult = () => {
                     </div>
                 )}
             </div>
+                    </div>
+                )
+            }
+            {
+                hamburgermenuClicked === true &&(
+                    <HamburgerMenu/>
+                )
+            }
         </div>
     );
 };

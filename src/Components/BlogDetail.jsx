@@ -4,7 +4,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useRecoilValue } from "recoil";
-import { userAtom } from "../Store/Atoms/user";
+import { hamburgermenuClickedAtom, tokenAtom, userAtom } from "../Store/Atoms/user";
+import HamburgerMenu from "./HamburgerMenu";
 
 const BlogDetail = () => {
     const location = useLocation();
@@ -14,18 +15,22 @@ const BlogDetail = () => {
     const [loading, setLoading] = useState(true);
     const [userComment, setUserComment] = useState({});
     const [commentData, setCommentData] = useState("");
-
+    const hamburgermenuClicked = useRecoilValue(hamburgermenuClickedAtom)
+    const token  = useRecoilValue(tokenAtom);
     const fetchData = async () => {
         try {
             setLoading(true);
             toast.loading("Fetching blog Details");
             const blogData = await axios.get(`https://blogify-ds91.onrender.com/api/v1/blog/fetchblog/${id}`);
-            const userCommentData = await axios.post("https://blogify-ds91.onrender.com/api/v1/comment/fetchusercomment", {
+            if(user.id !== undefined){
+                const userCommentData = await axios.post("https://blogify-ds91.onrender.com/api/v1/comment/fetchusercomment", {
                 postId: id,
                 userId: user.id
             });
             setUserComment(userCommentData.data.data);
             console.log(userCommentData.data.data);
+            console.log(userComment);
+            }
             toast.dismiss();
             toast.success("Blog fetched successfully");
             setLoading(false);
@@ -50,23 +55,28 @@ const BlogDetail = () => {
     };
 
     const addCommentHandler = async () => {
-        try {
-            toast.loading("Posting comment");
-            const res = await axios.post("https://blogify-ds91.onrender.com/api/v1/comment/addcomment", {
-                content: commentData,
-                postId: id,
-                userId: user.id,
-                fName: user.firstName,
-                LName: user.lastName,
-            });
-            await fetchData();
-            toast.dismiss();
-            toast.success("Comment added successfully");
-        } catch (error) {
-            toast.dismiss();
-            toast.error("Failed to add comment");
-            console.log(error);
+        if(token === null){
+            toast.error("Please Login to Comment");
+        }else{
+            try {
+                toast.loading("Posting comment");
+                const res = await axios.post("https://blogify-ds91.onrender.com/api/v1/comment/addcomment", {
+                    content: commentData,
+                    postId: id,
+                    userId: user.id,
+                    fName: user.firstName,
+                    LName: user.lastName,
+                });
+                await fetchData();
+                toast.dismiss();
+                toast.success("Comment added successfully");
+            } catch (error) {
+                toast.dismiss();
+                toast.error("Failed to add comment");
+                console.log(error);
+            }
         }
+        
     };
 
     const deleteCommentHandler = async (id) => {
@@ -85,7 +95,10 @@ const BlogDetail = () => {
     return (
         <div className="w-screen h-screen overflow-y-auto flex flex-col">
             <Navbar />
-            <div className="w-11/12 mx-auto mt-16">
+            {
+                hamburgermenuClicked ===  false && (
+                    <div>
+                                <div className="w-11/12 mx-auto mt-16">
                 {loading === false && (
                     <div>
                         <div className="border-b-2 border-black py-4 font-bold text-xl">{blog.title}</div>
@@ -105,7 +118,7 @@ const BlogDetail = () => {
                     {loading === false && (
                         <div className="mt-8">
                             <h2 className="text-2xl font-bold mb-4">Comments</h2>
-                            {userComment && (
+                            {userComment && Object.keys(userComment).length !== 0 && (
                                 <div className="border border-gray-200 rounded-md p-4 mb-4">
                                     <div className="flex justify-between items-center">
                                         <div className="flex gap-6">
@@ -122,13 +135,7 @@ const BlogDetail = () => {
                                         <div className="flex justify-between items-center">
                                             <div className="flex gap-6">
                                                 <div className="font-semibold text-lg">{`${comment.fName} ${comment.LName}`}</div>
-                                                <div>{loading === false && comment.userId === blog.author.id && (
-                                                    <div className="text-l text-black p-2 rounded-md">Author</div>
-                                                )}</div>
                                             </div>
-                                            {comment.userId === user.id && (
-                                                <button className="text-red-500 hover:text-red-700 font-bold" onClick={() => deleteCommentHandler(comment.id)}>Delete</button>
-                                            )}
                                         </div>
                                         <p className="mt-2">{comment.content}</p>
                                     </div>
@@ -137,8 +144,8 @@ const BlogDetail = () => {
                         </div>
                     )}
                     {loading && (
-                        <div>
-                            <div className="flex space-x-2 justify-center items-center bg-white dark:invert mt-16 max-[650px]:hidden">
+                        <div className="mt-32">
+                            <div className="flex space-x-2 justify-center items-center bg-white dark:invert  max-[650px]:hidden">
                                 <span className="sr-only">Loading...</span>
                                 <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]"></div>
                                 <div className="h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]"></div>
@@ -151,6 +158,14 @@ const BlogDetail = () => {
                     )}
                 </div>
             </div>
+                    </div>
+                )
+            }
+            {
+                hamburgermenuClicked === true &&(
+                    <HamburgerMenu/>
+                )
+            }
         </div>
     );
 };

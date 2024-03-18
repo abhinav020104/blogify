@@ -54,10 +54,25 @@ function Navbar() {
           />
           <a
             href="/"
-            className="text-slate-800 text-2xl font-xl font-bold font-mono cursor-pointer -ml-6 max-[400px]:hidden block"
+            className="text-slate-800 text-2xl font-xl font-bold font-mono cursor-pointer ml-6 max-[400px]:hidden block"
           >
             Blogify
           </a>
+          <div className="flex gap-6 ml-6">
+              <input
+                type="text"
+                className="w-[300px] p-2 rounded-md bg-slate-600 font-mono text-white max-[400px]:w-[100px]"
+                placeholder="search..."
+                name="search"
+                onChange={searchDataChangeHandler}
+              />
+              <button
+                className="font-xl text-white bg-slate-600 rounded-md p-3 hover:scale-95 duration-200"
+                onClick={searchClickHandler}
+              >
+                Search
+              </button>
+            </div>
         </div>
         {token === null && (
           <div className="max-[400px]:hidden">
@@ -83,21 +98,7 @@ function Navbar() {
         )}
         {token !== null && (
           <div className="flex justify-between items-center gap-10 text-black ">
-            <div className="flex gap-6 ">
-              <input
-                type="text"
-                className="w-[300px] p-2 rounded-md bg-slate-600 font-mono text-white max-[400px]:w-[100px]"
-                placeholder="search..."
-                name="search"
-                onChange={searchDataChangeHandler}
-              />
-              <button
-                className="font-xl text-white bg-slate-600 rounded-md p-3 hover:scale-95 duration-200"
-                onClick={searchClickHandler}
-              >
-                Search
-              </button>
-            </div>
+            
             <div className="font-bold text-black text-[15px] tracking-wide max-[400px]:hidden">
               {loading === false
                 ? `welcome ! ${user.firstName} ${user.lastName}`
