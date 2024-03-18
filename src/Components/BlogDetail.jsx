@@ -83,7 +83,7 @@ const BlogDetail = () => {
     };
 
     return (
-        <div className="w-screen min-h-screen overscroll-y-auto flex flex-col">
+        <div className="w-screen h-screen overflow-y-auto flex flex-col">
             <Navbar />
             <div className="w-11/12 mx-auto mt-32">
                 {loading === false && (
