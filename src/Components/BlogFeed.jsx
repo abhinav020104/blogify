@@ -49,8 +49,8 @@ const BlogFeed = () => {
             )}
             {loading === true && (
                 <div>
-                    <div className='flex space-x-2 justify-center items-center bg-slate-400 mt-12 dark:invert max-[650px]:hidden'>
-                        <span className='sr-only'>Loading...</span>
+                    <div className='flex space-x-2 justify-center items-center bg-slate-400 mt-12 max-[650px]:hidden'>
+                        <span className='sr-only  bg-slate-400'>Loading...</span>
                         <div className='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.3s]'></div>
                         <div className='h-8 w-8 bg-black rounded-full animate-bounce [animation-delay:-0.15s]'></div>
                         <div className='h-8 w-8 bg-black rounded-full animate-bounce'></div>
