@@ -23,9 +23,9 @@ const BlogFeed = () => {
     };
 
     useEffect(() => {
-        if (Object.keys(user).length !== 0 || token === null) {
-            fetchData();
-        }
+        fetchData();
+        // if (Object.keys(user).length !== 0 || token === null) {
+        // }
     }, [user, token]);
 
     return (
