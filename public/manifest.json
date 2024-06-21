@@ -1,0 +1,18 @@
+{
+    "lang": "en-us",
+    "name": "Blogify  app",
+    "short_name": "Blog ",
+    "description": "An app to read and post blogs",
+    "start_url": "/",
+    "background_color": "#2f3d58",
+    "theme_color": "#2f3d58",
+    "orientation": "any",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "https://img.freepik.com/free-vector/colorful-bird-illustration-gradient_343694-1741.jpg?size=338&ext=jpg&ga=GA1.1.44546679.1716285600&semt=ais_user",
+            "sizes": "512x512"
+        }
+    ]
+}
+
