@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { RecoilRoot } from 'recoil';
 import { BrowserRouter } from 'react-router-dom';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <RecoilRoot>
@@ -12,3 +13,4 @@ root.render(
     </BrowserRouter>
   </RecoilRoot>
 );
+serviceWorkerRegistration.register();
